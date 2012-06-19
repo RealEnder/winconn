@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Winconn
+_Comment=Winconn application
+Categories=GNOME;Utility;
+Exec=winconn
+Icon=winconn
+Terminal=false
+Type=Application
