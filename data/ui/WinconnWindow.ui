@@ -29,6 +29,8 @@
       <column type="gboolean"/>
       <!-- column-name RemoteFX -->
       <column type="gboolean"/>
+      <!-- column-name Conf -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="WinconnWindow" id="winconn_window">
@@ -216,7 +218,7 @@
                 <property name="label" translatable="yes">Execute</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-execute</property>
-                <signal name="clicked" handler="tbExec_clicked_cb" object="tvsApp" swapped="no"/>
+                <signal name="clicked" handler="tbExec_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -311,7 +313,9 @@
                     <property name="can_focus">True</property>
                     <property name="model">lsApps</property>
                     <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="tsApp"/>
+                      <object class="GtkTreeSelection" id="tsApp">
+                        <signal name="changed" handler="tsApp_changed" swapped="no"/>
+                      </object>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="tvcName">
@@ -364,6 +368,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-about</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application name</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Name can't be empty</property>
                         <property name="placeholder_text">My remote win cmd</property>
                       </object>
                       <packing>
@@ -411,6 +416,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-file</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application to execute. Avoid using ":"</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Application can't be empty. Also you cant use : character in it</property>
                         <property name="placeholder_text">cmd</property>
                       </object>
                       <packing>
@@ -443,6 +449,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-connect</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Terminal server address</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Server can't be empty</property>
                         <property name="placeholder_text">tserver.example.com</property>
                       </object>
                       <packing>
@@ -551,6 +558,7 @@
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-orientation-portrait</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Username cant't be empty</property>
                         <property name="placeholder_text">johndoe</property>
                       </object>
                       <packing>
@@ -567,6 +575,7 @@
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
                         <property name="text" translatable="yes">3389</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Port have to be in 1-65535 range</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -642,6 +651,7 @@
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-directory</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Folder not accessible</property>
                         <property name="placeholder_text">/home/doe</property>
                       </object>
                       <packing>
@@ -767,7 +777,7 @@
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
                         <property name="use_action_appearance">False</property>
-                        <signal name="clicked" handler="on_bSave_clicked" object="tvsApp" swapped="no"/>
+                        <signal name="clicked" handler="bSave_clicked" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
