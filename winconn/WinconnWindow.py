@@ -86,49 +86,37 @@ class WinconnWindow(Window):
             lApp.append(tm.get_value(ti, i))
             
         cmd = ['xfreerdp', '--ignore-certificate']
-        
         # compress
         if not lApp[8]:
             cmd.append('-z')
-        
         # RemoteFX
         if not lApp[11]:
             cmd.append('--rfx')
-        
         # we want RemmoteApp
         cmd.append('--app')
-        
         # port
         if lApp[3] != '3389':
             cmd.extend(['-t', lApp[3]])
-        
         # user
         cmd.extend(['-u', lApp[4]])
-        
         # pass
         # TODO from user pass?
         cmd.extend(['-p', lApp[5]])
-        
         # domain
         if lApp[6] != '':
             cmd.extend(['-d', lApp[6]])
-            
         # clipboard
         # does not work with freerdp 1.0.1
         if not lApp[9]:
             cmd.extend(['--plugin', 'cliprdr'])
-        
         # sound
         if not lApp[10]:
             cmd.extend(['--plugin', 'rdpsnd'])
-            
         # folder
         if lApp[7] != '':
             cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+lApp[7], '--'])
-        
         # app
         cmd.extend(['--app', '--plugin', 'rail.so', '--data', lApp[1]])
-            
         # server
         cmd.extend(['--', lApp[2]])
 
@@ -164,13 +152,12 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('No application selected'))
             
         cmd = self.buildCmd()
-        print(cmd)
+        # TODO check return code for error
         proc = Popen(cmd)
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
         self.emptyApp()
-        self.set_focus(self.ui.eName)
         self.ui.notebook.set_current_page(1)
         
     def tbDel_clicked(self, widget):
