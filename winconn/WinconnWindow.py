@@ -20,6 +20,7 @@ from time import time
 
 import os
 import os.path
+from subprocess import Popen
 from fnmatch import fnmatch
 import ConfigParser
 
@@ -38,7 +39,7 @@ class WinconnWindow(Window):
         self.ui.eDomain.set_text('')
         self.ui.eFolder.set_text('')
         self.ui.cbComp.set_active(False)
-        self.ui.cbClip.set_active(False)
+        self.ui.cbClip.set_active(True)
         self.ui.cbSound.set_active(False)
         self.ui.cbRFX.set_active(False)
     
@@ -61,7 +62,64 @@ class WinconnWindow(Window):
                         if odApp[val] == 'False':
                             odApp[val] = False
                     self.ui.lsApps.append(odApp.values())
-    
+                    
+    def buildCmd(self):
+        lApp = []
+
+        tm, ti = self.ui.tsApp.get_selected()
+        for i in range(0, tm.get_n_columns()-1):
+            lApp.append(tm.get_value(ti, i))
+            
+        cmd = ['xfreerdp', '--ignore-certificate']
+        
+        # compress
+        if not lApp[8]:
+            cmd.append('-z')
+        
+        # RemoteFX
+        if not lApp[11]:
+            cmd.append('--rfx')
+        
+        # we want RemmoteApp
+        cmd.append('--app')
+        
+        # port
+        if lApp[3] != '3389':
+            cmd.extend(['-t', lApp[3]])
+        
+        # user
+        cmd.extend(['-u', lApp[4]])
+        
+        # pass
+        # TODO from user pass?
+        cmd.extend(['-p', lApp[5]])
+        
+        # domain
+        if lApp[6] != '':
+            cmd.extend(['-d', lApp[6]])
+            
+        # clipboard
+        # does not work with freerdp 1.0.1
+        if not lApp[9]:
+            cmd.extend(['--plugin', 'cliprdr'])
+        
+        # sound
+        if not lApp[10]:
+            cmd.extend(['--plugin', 'rdpsnd'])
+            
+        # folder
+        if lApp[7] != '':
+            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+lApp[7], '--'])
+        
+        # app
+        cmd.extend(['--app', '--plugin', 'rail.so', '--data', lApp[1]])
+            
+        # server
+        cmd.extend(['--', lApp[2]])
+
+        return cmd
+
+        
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
         super(WinconnWindow, self).finish_initializing(builder)
@@ -86,11 +144,15 @@ class WinconnWindow(Window):
         self.confdir = os.getenv('HOME') + '/.winconn/'
         self.readApps()
 
-    def tbExec_clicked_cb(self, widget, data=None):
+    def tbExec_clicked(self, widget, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
-
-    def tbNew_clicked_cb(self, widget):
+            
+        cmd = self.buildCmd()
+        print(cmd)
+        proc = Popen(cmd)
+        
+    def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
         self.emptyApp()
         self.set_focus(self.ui.eName)
