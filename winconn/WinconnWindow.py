@@ -43,6 +43,9 @@ class WinconnWindow(Window):
         self.ui.cbRFX.set_active(False)
     
     def readApps(self):
+        if not os.path.isdir(self.confdir):
+            return
+            
         for fname in os.listdir(self.confdir):
             if fnmatch(fname, '*.winconn'):
                 with open(self.confdir+fname, 'r') as conf:
@@ -83,20 +86,31 @@ class WinconnWindow(Window):
         self.confdir = os.getenv('HOME') + '/.winconn/'
         self.readApps()
 
-
-
-    def tbNew_clicked_cb(self, widget):
-        self.emptyApp()
-        self.set_focus(self.ui.eName)
-        self.ui.notebook.set_current_page(1)
-        
     def tbExec_clicked_cb(self, widget, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
 
+    def tbNew_clicked_cb(self, widget):
+        self.ui.tsApp.unselect_all()
+        self.emptyApp()
+        self.set_focus(self.ui.eName)
+        self.ui.notebook.set_current_page(1)
+        
+    def tbDel_clicked(self, widget):
+        # TODO ask for confirmation
+        tm, ti = self.ui.tsApp.get_selected()
+        if ti is None:
+            self.ui.lStatus.set_text(_('No application selected'))
+            return
+        # FIXME ref by name?
+        conf = tm.get_value(ti, 12)
+        self.ui.lsApps.remove(ti)
+        os.unlink(self.confdir + conf)
+
     def bCancel_clicked(self, widget):
         self.ui.notebook.set_current_page(0)
         self.emptyApp()
+        self.ui.tsApp.unselect_all()
 
     def bSave_clicked(self, widget, data=None):
         sis = 'secondary-icon-stock'
@@ -141,8 +155,8 @@ class WinconnWindow(Window):
         
         # Port
         try:
-            odApp['Port'] = int(odApp['Port'])
-            if odApp['Port'] <= 0 or odApp['Port'] >= 65535:
+            p = int(odApp['Port'])
+            if p <= 0 or p >= 65535:
                 raise ValueError
             self.ui.ePort.set_property(sis, None)
         except ValueError:
@@ -174,14 +188,45 @@ class WinconnWindow(Window):
         if self.ui.tsApp.count_selected_rows() == 0:
             # this is a new savefile
             odApp['Conf'] = str(int(round(time())))+'.winconn'
-            # FIXME add section name
-            config = ConfigParser.SafeConfigParser(odApp)
-            with open(self.confdir+odApp['Conf'],'w') as cfgfile:
-                config.write(cfgfile)
 
             self.ui.lsApps.append(odApp.values())
+            self.ui.lStatus.set_text(_('New application added successfully'))
+        else:
+            # this is current App update
+            tm, ti = self.ui.tsApp.get_selected()
+            odApp['Conf'] = tm.get_value(ti, 12)
+            lApp = odApp.values()
+            for i in range(0, tm.get_n_columns()-1):
+                self.ui.lsApps.set_value(ti, i, lApp[i])
+            self.ui.lStatus.set_text(_('Application updated successfully'))
             
+        # FIXME add section name
+        config = ConfigParser.SafeConfigParser(odApp)
+        with open(self.confdir+odApp['Conf'],'w') as cfgfile:
+            config.write(cfgfile)
+                
     def tsApp_changed(self, widget):
-        tm, tl = widget.get_selected_rows()
-        print(tl)
+        lApp = []
+        
+        tm, ti = self.ui.tsApp.get_selected()
+        if ti is None:
+            return
+        for i in range(0, tm.get_n_columns()):
+            lApp.append(tm.get_value(ti, i))
+        
+        self.ui.eName.set_text(lApp[0])
+        self.ui.eApp.set_text(lApp[1])
+        self.ui.eSrv.set_text(lApp[2])
+        self.ui.ePort.set_text(str(lApp[3]))
+        self.ui.eUser.set_text(lApp[4])
+        self.ui.ePass.set_text(lApp[5])
+        self.ui.eDomain.set_text(lApp[6])
+        self.ui.eFolder.set_text(lApp[7])
+        self.ui.cbComp.set_active(lApp[8])
+        self.ui.cbClip.set_active(lApp[9])
+        self.ui.cbSound.set_active(lApp[10])
+        self.ui.cbRFX.set_active(lApp[11])
+        
+        self.ui.notebook.set_current_page(1)
+        self.ui.lStatus.set_text('')
         

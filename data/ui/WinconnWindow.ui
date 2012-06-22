@@ -12,7 +12,7 @@
       <!-- column-name Server -->
       <column type="gchararray"/>
       <!-- column-name Port -->
-      <column type="guint"/>
+      <column type="gchararray"/>
       <!-- column-name User -->
       <column type="gchararray"/>
       <!-- column-name Pass -->
@@ -36,6 +36,7 @@
   <object class="WinconnWindow" id="winconn_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">WinConn</property>
+    <property name="window_position">center</property>
     <property name="icon">../media/winconn.svg</property>
     <child>
       <object class="GtkVBox" id="vbox">
@@ -262,6 +263,7 @@
                 <property name="label" translatable="yes">Delete</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-delete</property>
+                <signal name="clicked" handler="tbDel_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
