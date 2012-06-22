@@ -655,6 +655,7 @@
                         <property name="primary_icon_stock">gtk-directory</property>
                         <property name="secondary_icon_tooltip_text" translatable="yes">Folder not accessible</property>
                         <property name="placeholder_text">/home/doe</property>
+                        <signal name="icon-press" handler="eFolder_icon_press" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

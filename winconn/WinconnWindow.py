@@ -24,6 +24,8 @@ from subprocess import Popen
 from fnmatch import fnmatch
 import ConfigParser
 
+from quickly import prompts
+
 # See winconn_lib.Window.py for more details about how this class works
 class WinconnWindow(Window):
     __gtype_name__ = 'WinconnWindow'
@@ -292,3 +294,8 @@ class WinconnWindow(Window):
         self.ui.notebook.set_current_page(1)
         self.ui.lStatus.set_text('')
         
+    def eFolder_icon_press(self, widget, icon=None, data=None):
+        response, path = prompts.choose_directory()
+        # FIXME where the hell is gtk.RESPONSE_OK ?
+        if response == -5:
+            widget.set_text(path)
