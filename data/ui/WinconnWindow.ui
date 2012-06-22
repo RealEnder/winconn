@@ -314,6 +314,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">lsApps</property>
+                    <signal name="row-activated" handler="tbExec_clicked" swapped="no"/>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="tsApp">
                         <signal name="changed" handler="tsApp_changed" swapped="no"/>

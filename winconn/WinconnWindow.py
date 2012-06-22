@@ -146,7 +146,7 @@ class WinconnWindow(Window):
         self.confdir = os.getenv('HOME') + '/.winconn/'
         self.readApps()
 
-    def tbExec_clicked(self, widget, data=None):
+    def tbExec_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
             
