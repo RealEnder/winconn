@@ -76,13 +76,13 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
 DistUtilsExtra.auto.setup(
     name='winconn',
-    version='0.1',
-    #license='GPL-3',
-    #author='Your Name',
-    #author_email='email@ubuntu.com',
-    #description='UI for managing …',
-    #long_description='Here a longer description',
-    #url='https://launchpad.net/winconn',
+    version='0.0.1',
+    license='GPL-3',
+    author='Alex Stanev',
+    author_email='alex@stanev.org',
+    description='WinConn RemoteApp connection manager',
+    long_description='WinConn uses FreeRDP to provide users with seamless integration of remote windows applications on Ubuntu Desktop.',
+    url='https://launchpad.net/winconn',
     cmdclass={'install': InstallAndUpdateDataDirectory}
     )
 
