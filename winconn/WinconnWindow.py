@@ -53,10 +53,10 @@ class WinconnWindow(Window):
         self.ui.ePass.set_text('')
         self.ui.eDomain.set_text('')
         self.ui.eFolder.set_text('')
-        self.ui.cbComp.set_active(False)
-        self.ui.cbClip.set_active(True)
-        self.ui.cbSound.set_active(False)
-        self.ui.cbRFX.set_active(False)
+        self.ui.sComp.set_active(False)
+        self.ui.sClip.set_active(True)
+        self.ui.sSound.set_active(False)
+        self.ui.sRFX.set_active(False)
     
     def readApps(self):
         if not os.path.isdir(self.confdir):
@@ -208,10 +208,10 @@ class WinconnWindow(Window):
         odApp['Pass'] = self.ui.ePass.get_text()
         odApp['Doman'] = self.ui.eDomain.get_text()
         odApp['Folder'] = self.ui.eFolder.get_text()
-        odApp['Compress'] = self.ui.cbComp.get_active()
-        odApp['Clipboad'] = self.ui.cbClip.get_active()
-        odApp['Sound'] = self.ui.cbSound.get_active()
-        odApp['RemoteFX'] = self.ui.cbRFX.get_active()
+        odApp['Compress'] = self.ui.sComp.get_active()
+        odApp['Clipboad'] = self.ui.sClip.get_active()
+        odApp['Sound'] = self.ui.sSound.get_active()
+        odApp['RemoteFX'] = self.ui.sRFX.get_active()
            
         # check our input values
         valid = True
@@ -305,10 +305,10 @@ class WinconnWindow(Window):
         self.ui.ePass.set_text(lApp[5])
         self.ui.eDomain.set_text(lApp[6])
         self.ui.eFolder.set_text(lApp[7])
-        self.ui.cbComp.set_active(lApp[8])
-        self.ui.cbClip.set_active(lApp[9])
-        self.ui.cbSound.set_active(lApp[10])
-        self.ui.cbRFX.set_active(lApp[11])
+        self.ui.sComp.set_active(lApp[8])
+        self.ui.sClip.set_active(lApp[9])
+        self.ui.sSound.set_active(lApp[10])
+        self.ui.sRFX.set_active(lApp[11])
         
         self.ui.notebook.set_current_page(1)
         self.ui.lStatus.set_text('')
