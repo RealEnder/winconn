@@ -177,16 +177,18 @@ class WinconnWindow(Window):
         self.ui.notebook.set_current_page(1)
         
     def tbDel_clicked(self, widget):
-        # TODO ask for confirmation
         tm, ti = self.ui.tsApp.get_selected()
         if ti is None:
             self.ui.lStatus.set_text(_('No application selected'))
             return
         # FIXME ref by name?
-        conf = tm.get_value(ti, 12)
-        self.ui.lsApps.remove(ti)
-        os.unlink(self.confdir + conf)
-        
+        response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % tm.get_value(ti, 0))
+        if response == Gtk.ResponseType.YES:
+            # FIXME ref by name?
+            conf = tm.get_value(ti, 12)
+            self.ui.lsApps.remove(ti)
+            os.unlink(self.confdir + conf)
+
     def tbQuit_clicked(self, widget):
         self.destroy()
 
