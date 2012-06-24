@@ -158,7 +158,7 @@ class WinconnWindow(Window):
         col.pack_start(cell, True)
         col.add_attribute (cell, 'text', 2)
         
-        self.confdir = os.getenv('HOME') + '/.winconn/'
+        self.confdir = os.getenv('HOME') + '/.config/winconn/'
         self.readApps()
 
     def tbExec_clicked(self, widget, row=None, data=None):
@@ -186,6 +186,9 @@ class WinconnWindow(Window):
         conf = tm.get_value(ti, 12)
         self.ui.lsApps.remove(ti)
         os.unlink(self.confdir + conf)
+        
+    def tbQuit_clicked(self, widget):
+        self.destroy()
 
     def bCancel_clicked(self, widget):
         self.ui.notebook.set_current_page(0)
