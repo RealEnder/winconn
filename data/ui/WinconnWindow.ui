@@ -271,24 +271,18 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolItem" id="tbSearch">
+              <object class="GtkToolButton" id="tbQuit">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">end</property>
                 <property name="use_action_appearance">False</property>
-                <child>
-                  <object class="GtkEntry" id="eSearch">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="invisible_char">•</property>
-                    <property name="primary_icon_stock">gtk-find</property>
-                    <property name="placeholder_text">Search...</property>
-                  </object>
-                </child>
+                <property name="label" translatable="yes">Quit</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-quit</property>
+                <signal name="clicked" handler="tbQuit_clicked" swapped="no"/>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="homogeneous">True</property>
               </packing>
             </child>

@@ -100,7 +100,21 @@ class WinconnWindow(Window):
         # user
         cmd.extend(['-u', lApp[4]])
         # pass
-        # TODO from user pass?
+        if lApp[5] == '':
+            p = prompts.Prompt('WinConn',_('Enter password for application: ')+lApp[0])
+            ePass = Gtk.Entry()
+            ePass.set_visibility(False)
+            ePass.set_activates_default(True)
+            ePass.show()
+            p.content_box.pack_end(ePass, True, True, 5)
+            response = p.run()
+            userPass = ePass.get_text()
+            p.destroy()
+            if response == Gtk.ResponseType.OK:
+                lApp[5] = userPass
+            else:
+                return None
+            
         cmd.extend(['-p', lApp[5]])
         # domain
         if lApp[6] != '':
@@ -150,10 +164,12 @@ class WinconnWindow(Window):
     def tbExec_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
-            
+        
         cmd = self.buildCmd()
-        # TODO check return code for error
-        proc = Popen(cmd)
+        if cmd is not None:
+            # TODO check return code for error
+            #proc = Popen(cmd)
+            None
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
@@ -296,6 +312,5 @@ class WinconnWindow(Window):
         
     def eFolder_icon_press(self, widget, icon=None, data=None):
         response, path = prompts.choose_directory()
-        # FIXME where the hell is gtk.RESPONSE_OK ?
-        if response == -5:
+        if response == Gtk.ResponseType.OK:
             widget.set_text(path)
