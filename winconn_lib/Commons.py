@@ -8,42 +8,115 @@ from gi.repository import Gtk # pylint: disable=E0611
 import gettext
 from gettext import gettext as _
 
-from os import getenv
+import os
+from fnmatch import fnmatch
+import ConfigParser
+from collections import OrderedDict
 from quickly import prompts
 
 class Commons:
     __confdir__ = ''
+    __odApp__ = None
+    __wcSection__ = 'WinConn'
 
     def __init__(self):
-        self.__confdir__ = getenv('HOME') + '/.config/winconn/'
+        self.__confdir__ = os.getenv('HOME') + '/.config/winconn/'
+        if not os.path.isdir(self.__confdir__):
+            os.makedirs(self.__confdir__)
+        
 
     def get_conf(self):
         return self.__confdir__
     
-    def buildCmd(self, lApp):
-        #lApp = []
+    def init_App(self):
+        self.__odApp__ = OrderedDict([
+            ('name', ''),
+            ('app', ''),
+            ('server', ''),
+            ('port', '3389'),
+            ('user', ''),
+            ('pass', ''),
+            ('domain', ''),
+            ('folder', ''),
+            ('compress', False),
+            ('clipboard', True),
+            ('sound', False),
+            ('remotefx', False),
+            ('conf', '')
+        ])
+    
+    def get_App_opt(self, opt=None):
+        if opt is None:
+            return self.__odApp__.values()
+        else:
+            try:
+                if isinstance(opt, int):
+                    return self.__odApp__.values()[opt]
+                else:
+                    return self.__odApp__[opt]
+            except KeyError:
+                return None
 
-        #tm, ti = self.ui.tsApp.get_selected()
-        #for i in range(0, tm.get_n_columns()-1):
-        #    lApp.append(tm.get_value(ti, i))
-            
+    def set_App_opt(self, opt, val):
+        try:
+            if isinstance(opt, int):
+                self.__odApp__[self.__odApp__.keys()[opt]] = val
+            else:
+                self.__odApp__[opt] = val
+        except KeyError:
+            pass
+
+    def getApp(self, singlefname='*.winconn'):
+        for fname in os.listdir(self.__confdir__):
+            if fnmatch(fname, singlefname):
+                self.init_App()
+                with open(self.__confdir__+fname, 'r') as conf:
+                    config = ConfigParser.SafeConfigParser()
+                    config.readfp(conf)
+                    for key in self.__odApp__:
+                        usable = True
+                        try:
+                            if isinstance(self.__odApp__[key], bool):
+                                self.__odApp__[key] = config.getboolean(self.__wcSection__, key)
+                            else:
+                                self.__odApp__[key] = config.get(self.__wcSection__, key)
+                        except ConfigParser.NoSectionError:
+                            usable = False
+                            break
+                        except ConfigParser.NoOptionError:
+                            continue
+                    if usable:
+                        yield self.__odApp__.values()
+    
+    def setApp(self):
+        config = ConfigParser.SafeConfigParser()
+        config.add_section(self.__wcSection__)
+        for key in self.__odApp__:
+            config.set(self.__wcSection__, key, str(self.__odApp__[key]))
+        
+        with open(self.__confdir__+self.__odApp__['conf'],'w') as cfgfile:
+            config.write(cfgfile)
+    
+    def delApp(self):
+        os.unlink(self.__confdir__+self.__odApp__['conf'])
+
+    def buildCmd(self):
         cmd = ['xfreerdp', '--ignore-certificate']
         # compress
-        if not lApp[8]:
+        if not self.__odApp__['compress']:
             cmd.append('-z')
         # RemoteFX
-        if not lApp[11]:
+        if not self.__odApp__['remotefx']:
             cmd.append('--rfx')
-        # we want RemmoteApp
-        cmd.append('--app')
+
         # port
-        if lApp[3] != '3389':
-            cmd.extend(['-t', lApp[3]])
+        if self.__odApp__['port'] != '3389':
+            cmd.extend(['-t', self.__odApp__['port']])
         # user
-        cmd.extend(['-u', lApp[4]])
+        cmd.extend(['-u', self.__odApp__['user']])
         # pass
-        if lApp[5] == '':
-            p = prompts.Prompt('WinConn',_('Enter password for application: ')+lApp[0])
+        if self.__odApp__['pass'] == '':
+            p = prompts.Prompt('WinConn',_('Enter password for application: ')+self.__odApp__['name'])
             ePass = Gtk.Entry()
             ePass.set_visibility(False)
             ePass.set_activates_default(True)
@@ -53,28 +126,27 @@ class Commons:
             userPass = ePass.get_text()
             p.destroy()
             if response == Gtk.ResponseType.OK:
-                lApp[5] = userPass
+                self.__odApp__['pass'] = userPass
             else:
                 return None
             
-        cmd.extend(['-p', lApp[5]])
+        cmd.extend(['-p', self.__odApp__['pass']])
         # domain
-        if lApp[6] != '':
-            cmd.extend(['-d', lApp[6]])
+        if self.__odApp__['domain'] != '':
+            cmd.extend(['-d', self.__odApp__['domain']])
         # clipboard
         # does not work with freerdp 1.0.1
-        if not lApp[9]:
+        if not self.__odApp__['clipboard']:
             cmd.extend(['--plugin', 'cliprdr'])
         # sound
-        if not lApp[10]:
+        if not self.__odApp__['sound']:
             cmd.extend(['--plugin', 'rdpsnd'])
         # folder
-        if lApp[7] != '':
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+lApp[7], '--'])
+        if self.__odApp__['folder'] != '':
+            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+self.__odApp__['folder'], '--'])
         # app
-        cmd.extend(['--app', '--plugin', 'rail.so', '--data', lApp[1]])
+        cmd.extend(['--app', '--plugin', 'rail.so', '--data', self.__odApp__['app']])
         # server
-        cmd.extend(['--', lApp[2]])
+        cmd.extend(['--', self.__odApp__['server']])
 
         return cmd
-

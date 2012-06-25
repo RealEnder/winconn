@@ -34,8 +34,6 @@ from time import time
 import os
 import os.path
 from subprocess import Popen
-from fnmatch import fnmatch
-import ConfigParser
 from winconn_lib import Commons
 
 from quickly import prompts
@@ -45,39 +43,9 @@ class WinconnWindow(Window):
     __gtype_name__ = 'WinconnWindow'
     common = None
     
-    def emptyApp(self):
-        self.ui.eName.set_text('')
-        self.ui.eApp.set_text('')
-        self.ui.eSrv.set_text('')
-        self.ui.ePort.set_text('3389')
-        self.ui.eUser.set_text('')
-        self.ui.ePass.set_text('')
-        self.ui.eDomain.set_text('')
-        self.ui.eFolder.set_text('')
-        self.ui.sComp.set_active(False)
-        self.ui.sClip.set_active(True)
-        self.ui.sSound.set_active(False)
-        self.ui.sRFX.set_active(False)
-    
     def readApps(self):
-        if not os.path.isdir(self.common.get_conf()):
-            return
-            
-        for fname in os.listdir(self.common.get_conf()):
-            if fnmatch(fname, '*.winconn'):
-                with open(self.common.get_conf()+fname, 'r') as conf:
-                    config = ConfigParser.SafeConfigParser()
-                    config.readfp(conf)
-                    # FIXME do not use DEFAULT section
-                    odApp = OrderedDict(config.items('DEFAULT'))
-                    # FIXME can we do something clever?
-                    for val in odApp:
-                        if odApp[val] == 'True':
-                            odApp[val] = True
-                            continue
-                        if odApp[val] == 'False':
-                            odApp[val] = False
-                    self.ui.lsApps.append(odApp.values())
+        for lApp in self.common.getApp():
+            self.ui.lsApps.append(lApp)
         
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
@@ -106,13 +74,9 @@ class WinconnWindow(Window):
     def tbExec_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
-        
-        lApp = []
-        tm, ti = self.ui.tsApp.get_selected()
-        for i in range(0, tm.get_n_columns()-1):
-            lApp.append(tm.get_value(ti, i))
+            return
 
-        cmd = self.common.buildCmd(lApp)
+        cmd = self.common.buildCmd()
         if cmd is not None:
             # TODO check return code for error
             print(cmd)
@@ -120,7 +84,8 @@ class WinconnWindow(Window):
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
-        self.emptyApp()
+        self.common.init_App()
+        self.show_App()
         self.ui.notebook.set_current_page(1)
         
     def tbDel_clicked(self, widget):
@@ -128,58 +93,56 @@ class WinconnWindow(Window):
         if ti is None:
             self.ui.lStatus.set_text(_('No application selected'))
             return
-        # FIXME ref by name?
-        response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % tm.get_value(ti, 0))
+
+        response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % self.common.get_App_opt('name'))
         if response == Gtk.ResponseType.YES:
-            # FIXME ref by name?
-            conf = tm.get_value(ti, 12)
+            self.common.delApp()
             self.ui.lsApps.remove(ti)
-            os.unlink(self.common.get_conf() + conf)
 
     def tbQuit_clicked(self, widget):
         self.destroy()
 
     def bCancel_clicked(self, widget):
         self.ui.notebook.set_current_page(0)
-        self.emptyApp()
+        self.common.init_App()
         self.ui.tsApp.unselect_all()
 
     def bSave_clicked(self, widget, data=None):
         sis = 'secondary-icon-stock'
         
         #build our conf
-        odApp = OrderedDict()
-        odApp['Name'] = self.ui.eName.get_text()
-        odApp['App'] = self.ui.eApp.get_text()
-        odApp['Server'] = self.ui.eSrv.get_text()
-        odApp['Port'] = self.ui.ePort.get_text()
-        odApp['User'] = self.ui.eUser.get_text()
-        odApp['Pass'] = self.ui.ePass.get_text()
-        odApp['Doman'] = self.ui.eDomain.get_text()
-        odApp['Folder'] = self.ui.eFolder.get_text()
-        odApp['Compress'] = self.ui.sComp.get_active()
-        odApp['Clipboad'] = self.ui.sClip.get_active()
-        odApp['Sound'] = self.ui.sSound.get_active()
-        odApp['RemoteFX'] = self.ui.sRFX.get_active()
+        self.common.init_App()
+        self.common.set_App_opt('name', self.ui.eName.get_text())
+        self.common.set_App_opt('app', self.ui.eApp.get_text())
+        self.common.set_App_opt('server', self.ui.eSrv.get_text())
+        self.common.set_App_opt('port', self.ui.ePort.get_text())
+        self.common.set_App_opt('user', self.ui.eUser.get_text())
+        self.common.set_App_opt('pass', self.ui.ePass.get_text())
+        self.common.set_App_opt('domain', self.ui.eDomain.get_text())
+        self.common.set_App_opt('folder', self.ui.eFolder.get_text())
+        self.common.set_App_opt('compress', self.ui.sComp.get_active())
+        self.common.set_App_opt('clipboard', self.ui.sClip.get_active())
+        self.common.set_App_opt('sound', self.ui.sSound.get_active())
+        self.common.set_App_opt('remotefx', self.ui.sRFX.get_active())
            
         # check our input values
         valid = True
         # Name
-        if odApp['Name'] == '':
+        if self.common.get_App_opt('name') == '':
             self.ui.eName.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         else:
             self.ui.eName.set_property(sis, None)
         
         # Application
-        if odApp['App'] == '':
+        if self.common.get_App_opt('app') == '':
             self.ui.eApp.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         else:
             self.ui.eApp.set_property(sis, None)
             
         # Server
-        if odApp['Server'] == '':
+        if self.common.get_App_opt('server') == '':
             self.ui.eSrv.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         else:
@@ -187,7 +150,7 @@ class WinconnWindow(Window):
         
         # Port
         try:
-            p = int(odApp['Port'])
+            p = int(self.common.get_App_opt('port'))
             if p <= 0 or p >= 65535:
                 raise ValueError
             self.ui.ePort.set_property(sis, None)
@@ -196,14 +159,14 @@ class WinconnWindow(Window):
             valid = False
         
         # User
-        if odApp['User'] == '':
+        if self.common.get_App_opt('user') == '':
             self.ui.eUser.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         else:
             self.ui.eUser.set_property(sis, None)
         
         # Folder
-        if odApp['Folder'] and not os.path.isdir(odApp['Folder']):
+        if self.common.get_App_opt('folder') and not os.path.isdir(self.common.get_App_opt('folder')):
             self.ui.eFolder.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         else:
@@ -215,46 +178,47 @@ class WinconnWindow(Window):
 
         if self.ui.tsApp.count_selected_rows() == 0:
             # this is a new savefile
-            odApp['Conf'] = str(int(round(time())))+'.winconn'
+            self.common.set_App_opt('conf', str(int(round(time())))+'.winconn')
 
-            self.ui.lsApps.append(odApp.values())
+            self.ui.lsApps.append(self.common.get_App_opt())
             self.ui.lStatus.set_text(_('New application added successfully'))
         else:
             # this is current App update
             tm, ti = self.ui.tsApp.get_selected()
-            odApp['Conf'] = tm.get_value(ti, 12)
-            lApp = odApp.values()
+            # get conf, must be always the last col
+            self.common.set_App_opt('conf', tm.get_value(ti, tm.get_n_columns()-1))
+            lApp = self.common.get_App_opt()
             for i in range(0, tm.get_n_columns()-1):
                 self.ui.lsApps.set_value(ti, i, lApp[i])
             self.ui.lStatus.set_text(_('Application updated successfully'))
             
-        # FIXME add section name
-        config = ConfigParser.SafeConfigParser(odApp)
-        with open(self.common.get_conf()+odApp['Conf'],'w') as cfgfile:
-            config.write(cfgfile)
-                
-    def tsApp_changed(self, widget):
-        lApp = []
+        self.common.setApp()
         
+    def show_App(self):
+        self.ui.eName.set_text(self.common.get_App_opt('name'))
+        self.ui.eApp.set_text(self.common.get_App_opt('app'))
+        self.ui.eSrv.set_text(self.common.get_App_opt('server'))
+        self.ui.ePort.set_text(self.common.get_App_opt('port'))
+        self.ui.eUser.set_text(self.common.get_App_opt('user'))
+        self.ui.ePass.set_text(self.common.get_App_opt('pass'))
+        self.ui.eDomain.set_text(self.common.get_App_opt('domain'))
+        self.ui.eFolder.set_text(self.common.get_App_opt('folder'))
+        self.ui.sComp.set_active(self.common.get_App_opt('compress'))
+        self.ui.sClip.set_active(self.common.get_App_opt('clipboard'))
+        self.ui.sSound.set_active(self.common.get_App_opt('sound'))
+        self.ui.sRFX.set_active(self.common.get_App_opt('remotefx'))
+
+    def tsApp_changed(self, widget):
         tm, ti = self.ui.tsApp.get_selected()
         if ti is None:
             return
+        
+        self.common.init_App()
         for i in range(0, tm.get_n_columns()):
-            lApp.append(tm.get_value(ti, i))
-        
-        self.ui.eName.set_text(lApp[0])
-        self.ui.eApp.set_text(lApp[1])
-        self.ui.eSrv.set_text(lApp[2])
-        self.ui.ePort.set_text(str(lApp[3]))
-        self.ui.eUser.set_text(lApp[4])
-        self.ui.ePass.set_text(lApp[5])
-        self.ui.eDomain.set_text(lApp[6])
-        self.ui.eFolder.set_text(lApp[7])
-        self.ui.sComp.set_active(lApp[8])
-        self.ui.sClip.set_active(lApp[9])
-        self.ui.sSound.set_active(lApp[10])
-        self.ui.sRFX.set_active(lApp[11])
-        
+            self.common.set_App_opt(i, tm.get_value(ti, i))
+
+        self.show_App()
+
         self.ui.notebook.set_current_page(1)
         self.ui.lStatus.set_text('')
         
