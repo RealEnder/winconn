@@ -38,6 +38,7 @@
     <property name="title" translatable="yes">WinConn</property>
     <property name="window_position">center</property>
     <property name="icon">../media/winconn.png</property>
+    <signal name="destroy" handler="winconn_window_destroy" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>

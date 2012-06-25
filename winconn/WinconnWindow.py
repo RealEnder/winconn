@@ -20,7 +20,7 @@ import gettext
 from gettext import gettext as _
 gettext.textdomain('winconn')
 
-from gi.repository import Gtk # pylint: disable=E0611
+from gi.repository import Gtk, GObject # pylint: disable=E0611
 import logging
 logger = logging.getLogger('winconn')
 
@@ -30,18 +30,46 @@ from winconn.PreferencesWinconnDialog import PreferencesWinconnDialog
 
 from collections import OrderedDict
 from time import time
+from time import sleep
 
 import os
 import os.path
+import threading
+import gobject
 from subprocess import Popen
 from winconn_lib import Commons
 
 from quickly import prompts
-
+            
 # See winconn_lib.Window.py for more details about how this class works
 class WinconnWindow(Window):
+    class cmdThread(threading.Thread):
+        def __init__(self, app, cmd, widget):
+            super(WinconnWindow.cmdThread, self).__init__()
+            self.app = app
+            self.cmd = cmd
+            self.widget = widget
+            self.quit = False
+        
+        def setStatus(self, rc):
+            s = _('unknown return code %i' % rc)
+            if rc == 131:
+                s = _('Can not connect to server')
+            self.widget.set_text('%s: %s' % (self.app, s))
+            return False
+
+        def run(self):
+            proc = Popen(self.cmd)
+            while not self.quit:
+                proc.poll()
+                if proc.returncode is not None:
+                    GObject.idle_add(self.setStatus, proc.returncode)
+                    return
+                sleep(0.1)
+             
     __gtype_name__ = 'WinconnWindow'
     common = None
+    t = None
     
     def readApps(self):
         for lApp in self.common.getApp():
@@ -78,10 +106,8 @@ class WinconnWindow(Window):
 
         cmd = self.common.buildCmd()
         if cmd is not None:
-            # TODO check return code for error
-            print(cmd)
-            proc = Popen(cmd)
-            proc.wait()
+            self.t = self.cmdThread(self.common.get_App_opt('name'), cmd, self.ui.lStatus)
+            self.t.start()
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
@@ -227,3 +253,7 @@ class WinconnWindow(Window):
         response, path = prompts.choose_directory()
         if response == Gtk.ResponseType.OK:
             widget.set_text(path)
+    
+    def winconn_window_destroy(self, widget):
+        if self.t is not None:
+            self.t.quit = True
