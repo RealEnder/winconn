@@ -37,6 +37,7 @@ import os.path
 import threading
 import gobject
 from subprocess import Popen
+from subprocess import PIPE
 from winconn_lib import Commons
 
 from quickly import prompts
@@ -44,6 +45,41 @@ from quickly import prompts
 # See winconn_lib.Window.py for more details about how this class works
 class WinconnWindow(Window):
     class cmdThread(threading.Thread):
+        proc = None
+        stout = ''
+        sterr = ''
+        __xfec__ = dict([
+            [-15, _('xfreerdp died unexpectedly')],
+            [  0, _('Success')],
+            [  1, _('Disconnect')],
+            [  2, _('Logoff')],
+            [  3, _('Idle timeout')],
+            [  4, _('Logon timeout')],
+            [  5, _('Connection replaced')],
+            [  6, _('Out of memory')],
+            [  7, _('Connection denied')],
+            [  8, _('Connection denied FIPS')],
+            [  9, _('Remote user does not have required privileges')],
+            [ 10, _('Fresh credientials required')],
+            [ 11, _('Disconnected by user')],
+            [ 16, _('Internal')],
+            [ 17, _('No license server')],
+            [ 18, _('No license')],
+            [ 19, _('Bad message from client')],
+            [ 20, _('HWID does not match')],
+            [ 21, _('Bad client')],
+            [ 22, _('Can no finish protocol')],
+            [ 23, _('Clent ended protocol')],
+            [ 24, _('Bad client encryption')],
+            [ 25, _('Can not upgrade protocol')],
+            [ 26, _('No remote connections allowed')],
+            [ 32, _('RDP protocol error')],
+            [128, _('Bad xfreerdp options. Consider filling a bug on Launchpad')],
+            [129, _('xfreerdp out of memory')],
+            [130, _('xfreerdp protocol error')],
+            [131, _('Connection to server failed')]
+        ])
+        
         def __init__(self, app, cmd, widget):
             super(WinconnWindow.cmdThread, self).__init__()
             self.app = app
@@ -52,18 +88,25 @@ class WinconnWindow(Window):
             self.quit = False
         
         def setStatus(self, rc):
-            s = _('unknown return code %i' % rc)
-            if rc == 131:
-                s = _('Can not connect to server')
+            try:
+                s = self.__xfec__[rc]
+            except KeyError:
+                s = _('Unknown return code %i' % rc)
+                
+            if self.stout.find('RAIL_EXEC_E_NOT_IN_ALLOWLIST') != -1:
+                s = _('Application not in RemoteApp list. Check help to fix this.')
+                
             self.widget.set_text('%s: %s' % (self.app, s))
+            
             return False
 
         def run(self):
-            proc = Popen(self.cmd)
+            self.proc = Popen(self.cmd, stdout=PIPE)
             while not self.quit:
-                proc.poll()
-                if proc.returncode is not None:
-                    GObject.idle_add(self.setStatus, proc.returncode)
+                self.proc.poll()
+                if self.proc.returncode is not None:
+                    self.stout, self.sterr = self.proc.communicate()
+                    GObject.idle_add(self.setStatus, self.proc.returncode)
                     return
                 sleep(0.1)
              
