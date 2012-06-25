@@ -1,3 +1,5 @@
 project = winconn
 version = 12.04
 template = ubuntu-application
+bzrbranch = lp:winconn
+dependencies = 

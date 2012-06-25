@@ -36,13 +36,14 @@ import os.path
 from subprocess import Popen
 from fnmatch import fnmatch
 import ConfigParser
+from winconn_lib import Commons
 
 from quickly import prompts
 
 # See winconn_lib.Window.py for more details about how this class works
 class WinconnWindow(Window):
     __gtype_name__ = 'WinconnWindow'
-    confdir = ''
+    common = None
     
     def emptyApp(self):
         self.ui.eName.set_text('')
@@ -59,12 +60,12 @@ class WinconnWindow(Window):
         self.ui.sRFX.set_active(False)
     
     def readApps(self):
-        if not os.path.isdir(self.confdir):
+        if not os.path.isdir(self.common.get_conf()):
             return
             
-        for fname in os.listdir(self.confdir):
+        for fname in os.listdir(self.common.get_conf()):
             if fnmatch(fname, '*.winconn'):
-                with open(self.confdir+fname, 'r') as conf:
+                with open(self.common.get_conf()+fname, 'r') as conf:
                     config = ConfigParser.SafeConfigParser()
                     config.readfp(conf)
                     # FIXME do not use DEFAULT section
@@ -77,65 +78,6 @@ class WinconnWindow(Window):
                         if odApp[val] == 'False':
                             odApp[val] = False
                     self.ui.lsApps.append(odApp.values())
-                    
-    def buildCmd(self):
-        lApp = []
-
-        tm, ti = self.ui.tsApp.get_selected()
-        for i in range(0, tm.get_n_columns()-1):
-            lApp.append(tm.get_value(ti, i))
-            
-        cmd = ['xfreerdp', '--ignore-certificate']
-        # compress
-        if not lApp[8]:
-            cmd.append('-z')
-        # RemoteFX
-        if not lApp[11]:
-            cmd.append('--rfx')
-        # we want RemmoteApp
-        cmd.append('--app')
-        # port
-        if lApp[3] != '3389':
-            cmd.extend(['-t', lApp[3]])
-        # user
-        cmd.extend(['-u', lApp[4]])
-        # pass
-        if lApp[5] == '':
-            p = prompts.Prompt('WinConn',_('Enter password for application: ')+lApp[0])
-            ePass = Gtk.Entry()
-            ePass.set_visibility(False)
-            ePass.set_activates_default(True)
-            ePass.show()
-            p.content_box.pack_end(ePass, True, True, 5)
-            response = p.run()
-            userPass = ePass.get_text()
-            p.destroy()
-            if response == Gtk.ResponseType.OK:
-                lApp[5] = userPass
-            else:
-                return None
-            
-        cmd.extend(['-p', lApp[5]])
-        # domain
-        if lApp[6] != '':
-            cmd.extend(['-d', lApp[6]])
-        # clipboard
-        # does not work with freerdp 1.0.1
-        if not lApp[9]:
-            cmd.extend(['--plugin', 'cliprdr'])
-        # sound
-        if not lApp[10]:
-            cmd.extend(['--plugin', 'rdpsnd'])
-        # folder
-        if lApp[7] != '':
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+lApp[7], '--'])
-        # app
-        cmd.extend(['--app', '--plugin', 'rail.so', '--data', lApp[1]])
-        # server
-        cmd.extend(['--', lApp[2]])
-
-        return cmd
-
         
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
@@ -158,18 +100,23 @@ class WinconnWindow(Window):
         col.pack_start(cell, True)
         col.add_attribute (cell, 'text', 2)
         
-        self.confdir = os.getenv('HOME') + '/.config/winconn/'
+        self.common = Commons.Commons()
         self.readApps()
 
     def tbExec_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected'))
         
-        cmd = self.buildCmd()
+        lApp = []
+        tm, ti = self.ui.tsApp.get_selected()
+        for i in range(0, tm.get_n_columns()-1):
+            lApp.append(tm.get_value(ti, i))
+
+        cmd = self.common.buildCmd(lApp)
         if cmd is not None:
             # TODO check return code for error
-            #proc = Popen(cmd)
-            None
+            print(cmd)
+            proc = Popen(cmd)
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
@@ -187,7 +134,7 @@ class WinconnWindow(Window):
             # FIXME ref by name?
             conf = tm.get_value(ti, 12)
             self.ui.lsApps.remove(ti)
-            os.unlink(self.confdir + conf)
+            os.unlink(self.common.get_conf() + conf)
 
     def tbQuit_clicked(self, widget):
         self.destroy()
@@ -265,10 +212,6 @@ class WinconnWindow(Window):
         if not valid:
             self.ui.lStatus.set_text(_('Please check your application configuration'))
             return
-        
-        # everyting OK, proceeed with save
-        if not os.path.isdir(self.confdir):
-            os.makedirs(self.confdir)
 
         if self.ui.tsApp.count_selected_rows() == 0:
             # this is a new savefile
@@ -287,7 +230,7 @@ class WinconnWindow(Window):
             
         # FIXME add section name
         config = ConfigParser.SafeConfigParser(odApp)
-        with open(self.confdir+odApp['Conf'],'w') as cfgfile:
+        with open(self.common.get_conf()+odApp['Conf'],'w') as cfgfile:
             config.write(cfgfile)
                 
     def tsApp_changed(self, widget):
