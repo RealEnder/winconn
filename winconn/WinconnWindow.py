@@ -81,6 +81,7 @@ class WinconnWindow(Window):
             # TODO check return code for error
             print(cmd)
             proc = Popen(cmd)
+            proc.wait()
         
     def tbNew_clicked(self, widget):
         self.ui.tsApp.unselect_all()
