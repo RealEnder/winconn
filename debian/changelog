@@ -1,3 +1,34 @@
+winconn (12.06) precise; urgency=low
+
+  * some quickly automagics
+  * Creating ubuntu package
+  * some pylint fixes
+  * set version
+  * set version
+  * update license info
+  * UI refresh: logo, menu, get rid of preferences, move to argparser
+  * Add xfreerdp error codes
+  * Create separate thread for connection and catch return code from
+    xfreerdp
+  * Major restructure
+  * Major restructure
+  * separate som logic, so we can have a commandline options
+  * Ask for confirmation on delete
+  * Change checkboxes to switch
+  * Move confiuration files to .config
+  * Don't disable clipboad feature, just leave disabled default
+  * Ask user for pass if not saved
+  * update setup
+  * pylint
+  * License GPLv3
+  * Execute app on doubleclick
+  * Choose folder on icon click
+  * execute xfreerdp
+  * Implement apps update and delete
+  * Implement validations and save config
+
+ -- Alex Stanev <alex@stanev.org>  Tue, 26 Jun 2012 13:57:54 +0300
+
 winconn (0.1-public1) precise; urgency=low
 
   * New release.
