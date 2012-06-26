@@ -26,7 +26,6 @@ logger = logging.getLogger('winconn')
 
 from winconn_lib import Window
 from winconn.AboutWinconnDialog import AboutWinconnDialog
-from winconn.PreferencesWinconnDialog import PreferencesWinconnDialog
 
 from collections import OrderedDict
 from time import time
@@ -123,7 +122,6 @@ class WinconnWindow(Window):
         super(WinconnWindow, self).finish_initializing(builder)
 
         self.AboutDialog = AboutWinconnDialog
-        self.PreferencesDialog = PreferencesWinconnDialog
         
         # connect tree to values
         cell = Gtk.CellRendererText()

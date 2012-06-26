@@ -3,7 +3,7 @@
 # This file is in the public domain
 ### END LICENSE
 
-import optparse
+import argparse
 
 import gettext
 from gettext import gettext as _
@@ -12,20 +12,26 @@ gettext.textdomain('winconn')
 from gi.repository import Gtk, GObject # pylint: disable=E0611
 
 from winconn import WinconnWindow
-
 from winconn_lib import set_up_logging, get_version
 
 GObject.threads_init()
 
 def parse_options():
     """Support for command line options"""
-    parser = optparse.OptionParser(version="%%prog %s" % get_version())
-    parser.add_option(
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--version', action='version', version='%%prog %s' % get_version())
+    parser.add_argument(
         "-v", "--verbose", action="count", dest="verbose",
         help=_("Show debug messages (-vv debugs winconn_lib also)"))
-    (options, args) = parser.parse_args()
+    parser.add_argument(
+        "-n", "--new",
+        help=_("Create new application connection"))
+    parser.add_argument(
+        "-e", "--execute", dest="FILE",
+        help=_("Execute saved session from file in ~/.config/winconn"))
+    args = parser.parse_args()
 
-    set_up_logging(options)
+    set_up_logging(args)
 
 def main():
     'constructor for your class instances'
