@@ -3,6 +3,6 @@ _Name=WinConn
 _Comment=WinConn RemoteApp manager
 Categories=GNOME;Utility;
 Exec=winconn
-Icon=winconn
+Icon=/usr/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
