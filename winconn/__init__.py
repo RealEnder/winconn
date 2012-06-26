@@ -25,6 +25,9 @@ import dbus, dbus.service, dbus.glib
 
 from winconn import WinconnWindow
 from winconn_lib import set_up_logging, get_version
+from winconn_lib import Commons
+
+from subprocess import Popen
 
 GObject.threads_init()
 
@@ -54,8 +57,8 @@ def parse_options():
         "-n", "--new", action='store_true', default=False, dest='new',
         help=_("Create new application connection"))
     parser.add_argument(
-        "-e", "--execute", dest="FILE",
-        help=_("Execute saved session from file in ~/.config/winconn"))
+        "-e", "--execute", dest="AppName",
+        help=_("Execute saved application by name"))
     args = parser.parse_args()
 
     set_up_logging(args)
@@ -65,7 +68,17 @@ def parse_options():
 def main():
     'constructor for your class instances'
     args = parse_options()
-    print(args)
+    
+    # execute app profile if passed
+    if args.AppName is not None:
+        common = Commons.Commons()
+        for lApp in common.getApp():
+            if lApp[0] == args.AppName:
+                cmd = common.buildCmd()
+                if cmd is not None:
+                    Popen(cmd)
+                    return
+        del common
     
     # check if WinConn is running and pass params to it
     if dbus.SessionBus().request_name("org.stanev.winconn") != dbus.bus.REQUEST_NAME_REPLY_PRIMARY_OWNER:
@@ -79,6 +92,7 @@ def main():
         window = WinconnWindow.WinconnWindow()
         service = WinconnService(window)
         if args.new:
-            window.tbNew_clicked(None)
+            window.tbNew_clicked(window)
+        
         window.show()
         Gtk.main()
