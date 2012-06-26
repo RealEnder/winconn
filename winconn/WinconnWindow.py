@@ -93,7 +93,7 @@ class WinconnWindow(Window):
             except KeyError:
                 s = _('Unknown return code %i' % rc)
                 
-            if self.stout.find('RAIL_EXEC_E_NOT_IN_ALLOWLIST') != -1:
+            if ''.join(self.stout).find('RAIL_EXEC_E_NOT_IN_ALLOWLIST') != -1:
                 s = _('Application not in RemoteApp list. Check help to fix this.')
                 
             self.widget.set_text('%s: %s' % (self.app, s))
