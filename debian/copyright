@@ -1,0 +1,11 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Name: winconn
+Maintainer: Alex Stanev <alex@stanev.org>
+Source: https://launchpad.net/winconn
+
+Files: *
+Copyright: (C) 2012 Alex Stanev <alex@stanev.org>
+Copyright: (C) YYYY <Your Name> <Your E-mail>
+License: GPL-3
+ The full text of the GPL is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.
