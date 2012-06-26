@@ -1,29 +1,5 @@
 winconn (0.1-public11) precise; urgency=low
 
-  * New release.
+  * Initial public release.
 
- -- Alex Stanev <alex@stanev.org>  Tue, 26 Jun 2012 15:39:10 +0300
-
-winconn (0.1-public10) precise; urgency=low
-
-  * New release.
-
- -- Alex Stanev <alex@stanev.org>  Tue, 26 Jun 2012 15:25:32 +0300
-
-winconn (0.1-public9) precise; urgency=low
-
-  * New release.
-
- -- Alex Stanev <alex@osi>  Tue, 26 Jun 2012 15:15:20 +0300
-
-winconn (0.1-public8ubuntu1) precise; urgency=low
-
-  * 
-
- -- Alex Stanev <alex@osi>  Tue, 26 Jun 2012 14:52:29 +0300
-
-winconn (0.1-public8) precise; urgency=low
-
-  * Initial release.
-
- -- Alex Stanev <alex@stanev.org>  Tue, 26 Jun 2012 14:48:00 +0300
+ -- Alex Stanev <alex@osi>  Tue, 26 Jun 2012 21:54:45 +0300
