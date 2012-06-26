@@ -169,7 +169,7 @@ class WinconnWindow(Window):
             self.ui.lsApps.remove(ti)
 
     def tbQuit_clicked(self, widget):
-        Gtk.main_quit()
+        self.destroy()
 
     def bCancel_clicked(self, widget):
         self.ui.notebook.set_current_page(0)
