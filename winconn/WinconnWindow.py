@@ -203,6 +203,20 @@ class WinconnWindow(Window):
         else:
             self.ui.eName.set_property(sis, None)
         
+        # Name unique
+        lAppNames = []
+        for row in self.ui.lsApps:
+            lAppNames.append(row[0])
+            
+        if self.ui.tsApp.count_selected_rows() == 1:
+            # remove current name from list, we are updating
+            tm, ti = self.ui.tsApp.get_selected()
+            lAppNames.remove(tm.get_value(ti, 0))
+            
+        if self.common.get_App_opt('name') in lAppNames:
+            self.ui.eName.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+
         # Application
         if self.common.get_App_opt('app') == '':
             self.ui.eApp.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
@@ -253,7 +267,6 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('New application added successfully'))
         else:
             # this is current App update
-            tm, ti = self.ui.tsApp.get_selected()
             # get conf, must be always the last col
             self.common.set_App_opt('conf', tm.get_value(ti, tm.get_n_columns()-1))
             lApp = self.common.get_App_opt()

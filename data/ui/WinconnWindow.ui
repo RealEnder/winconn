@@ -351,7 +351,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-about</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application name</property>
-                        <property name="secondary_icon_tooltip_text" translatable="yes">Name can't be empty</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Name must be unique</property>
                         <property name="placeholder_text">My remote win cmd</property>
                       </object>
                       <packing>
