@@ -19,7 +19,8 @@ Depends: ${misc:Depends},
  python-gobject-2,
  python-quickly-common,
  gir1.2-launchpad-integration-3.0,
- yelp
+ yelp,
+ freerdp-x11
 Description: WinConn RemoteApp connection manager
  WinConn uses FreeRDP to provide users with seamless integration of
  remote windows applications on Ubuntu Desktop.
