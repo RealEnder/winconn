@@ -1,3 +1,5 @@
+# Apport integration for winconn
+#
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2012 Alex Stanev <alex@stanev.org>
@@ -13,10 +15,11 @@
 # You should have received a copy of the GNU General Public License along 
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
+import apport
 
-'''facade - makes winconn_lib package easy to refactor
+def add_info(report):
+    """add report info"""
 
-while keeping its api constant'''
-from . helpers import set_up_logging
-from . Window import Window
-from . winconnconfig import get_version
+    if not apport.packaging.is_distro_package(report['Package'].split()[0]):
+        report['ThirdParty'] = 'True'
+        report['CrashDB'] = 'winconn'
