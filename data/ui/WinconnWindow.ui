@@ -131,6 +131,7 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Create desktop shortcut</property>
                         <property name="use_underline">True</property>
+                        <signal name="activate" handler="tbShortcut_clicked" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -271,6 +272,7 @@
                 <property name="label" translatable="yes">Create shortcut</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">user-desktop</property>
+                <signal name="clicked" handler="tbShortcut_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

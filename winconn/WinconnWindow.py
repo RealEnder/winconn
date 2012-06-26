@@ -31,6 +31,7 @@ from winconn.AboutWinconnDialog import AboutWinconnDialog
 from collections import OrderedDict
 from time import time
 from time import sleep
+import tempfile
 
 import os
 import os.path
@@ -38,6 +39,8 @@ import threading
 import gobject
 from subprocess import Popen
 from subprocess import PIPE
+from subprocess import call
+from shutil import rmtree
 from winconn_lib import Commons
 
 from quickly import prompts
@@ -143,7 +146,7 @@ class WinconnWindow(Window):
 
     def tbExec_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
-            self.ui.lStatus.set_text(_('No application selected'))
+            self.ui.lStatus.set_text(_('No application for execution selected'))
             return
 
         cmd = self.common.buildCmd()
@@ -160,13 +163,40 @@ class WinconnWindow(Window):
     def tbDel_clicked(self, widget):
         tm, ti = self.ui.tsApp.get_selected()
         if ti is None:
-            self.ui.lStatus.set_text(_('No application selected'))
+            self.ui.lStatus.set_text(_('No application for deletion selected'))
             return
 
         response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % self.common.get_App_opt('name'))
         if response == Gtk.ResponseType.YES:
             self.common.delApp()
             self.ui.lsApps.remove(ti)
+
+    def tbShortcut_clicked(self, widget, row=None, data=None):
+        if self.ui.tsApp.count_selected_rows() == 0:
+            self.ui.lStatus.set_text(_('No application to create desktop launcher selected'))
+            return
+        
+        appName = self.common.get_App_opt('name')
+        # yeah, it's ugly
+        template = '''[Desktop Entry]
+Name=%s
+Comment=WinConn RemoteApp
+Exec=winconn -e %s
+Icon=/usr/share/winconn/media/winconn.png
+Terminal=false
+Type=Application
+'''
+        
+        # create temp file for our new desktop launcher
+        try:
+            tdir = tempfile.mkdtemp(dir='/tmp')
+            with open(tdir+'/'+'winconn-'+appName+'.desktop', 'w') as dfile:
+                dfile.write(template % (appName, appName))
+            rc = call(['xdg-desktop-icon', 'install', tdir+'/'+'winconn-'+appName+'.desktop'])
+            if rc:
+                self.ui.lStatus.set_text(_('Could not create desktop launcher'))
+        finally:
+            rmtree(tdir)
 
     def tbQuit_clicked(self, widget):
         self.destroy()
