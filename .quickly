@@ -2,5 +2,6 @@ project = winconn
 version = 12.04
 template = ubuntu-application
 bzrbranch = lp:winconn
-dependencies = freerdp-x11
+dependencies = libfreerdp1, libfreerdp1-plugins-standard, freerdp-x11, python-quickly.widgets
 lp_id = winconn
+ppa = winconn

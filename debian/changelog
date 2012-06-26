@@ -1,3 +1,9 @@
+winconn (12.06ubuntu1) precise; urgency=low
+
+  * 
+
+ -- Alex Stanev <alex@osi>  Tue, 26 Jun 2012 14:21:56 +0300
+
 winconn (12.06) precise; urgency=low
 
   * some quickly automagics
