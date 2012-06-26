@@ -64,7 +64,7 @@ def update_desktop_file(datadir):
 
         for line in fin:            
             if 'Icon=' in line:
-                line = "Icon=%s\n" % (datadir + 'media/winconn.svg')
+                line = "Icon=%s\n" % (datadir + 'media/winconn.png')
             fout.write(line)
         fout.flush()
         fout.close()
@@ -92,7 +92,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
 DistUtilsExtra.auto.setup(
     name='winconn',
-    version='0.0.1',
+    version='0.1',
     license='GPL-3',
     author='Alex Stanev',
     author_email='alex@stanev.org',

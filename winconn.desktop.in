@@ -1,6 +1,6 @@
 [Desktop Entry]
-_Name=Winconn
-_Comment=Winconn application
+_Name=WinConn
+_Comment=WinConn RemoteApp manager
 Categories=GNOME;Utility;
 Exec=winconn
 Icon=winconn
