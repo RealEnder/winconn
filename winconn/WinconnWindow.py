@@ -180,7 +180,7 @@ class WinconnWindow(Window):
         template = '''[Desktop Entry]
 Name=%s
 Comment=WinConn RemoteApp
-Exec=winconn -e %s
+Exec=winconn -e "%s"
 Icon=/usr/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
