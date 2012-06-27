@@ -29,7 +29,6 @@ from winconn_lib import Window
 from winconn.AboutWinconnDialog import AboutWinconnDialog
 
 from collections import OrderedDict
-from time import time
 from time import sleep
 import tempfile
 
@@ -205,6 +204,18 @@ Type=Application
         self.ui.notebook.set_current_page(0)
         self.common.init_App()
         self.ui.tsApp.unselect_all()
+    
+    def miImportRemmina_activate(self, widget):
+        lAppNames = []
+        for row in self.ui.lsApps:
+            lAppNames.append(row[0])
+            
+        for lApp in self.common.importRemmina(lAppNames):
+            sleep(0.001)
+            self.common.setApp()
+            self.ui.lsApps.append(self.common.get_App_opt())
+
+        self.ui.lStatus.set_text(_('Remmina import finnished'))
 
     def bSave_clicked(self, widget, data=None):
         sis = 'secondary-icon-stock'
@@ -291,8 +302,7 @@ Type=Application
 
         if self.ui.tsApp.count_selected_rows() == 0:
             # this is a new savefile
-            self.common.set_App_opt('conf', str(int(round(time())))+'.winconn')
-
+            self.common.setApp()
             self.ui.lsApps.append(self.common.get_App_opt())
             self.ui.lStatus.set_text(_('New application added successfully'))
         else:
@@ -302,10 +312,9 @@ Type=Application
             lApp = self.common.get_App_opt()
             for i in range(0, tm.get_n_columns()-1):
                 self.ui.lsApps.set_value(ti, i, lApp[i])
+            self.common.setApp()
             self.ui.lStatus.set_text(_('Application updated successfully'))
-            
-        self.common.setApp()
-        
+
     def show_App(self):
         self.ui.eName.set_text(self.common.get_App_opt('name'))
         self.ui.eApp.set_text(self.common.get_App_opt('app'))

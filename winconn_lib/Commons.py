@@ -21,6 +21,7 @@ from gettext import gettext as _
 
 import os
 from fnmatch import fnmatch
+from time import time
 import ConfigParser
 from collections import OrderedDict
 from quickly import prompts
@@ -100,6 +101,8 @@ class Commons:
                         yield self.__odApp__.values()
     
     def setApp(self):
+        if self.__odApp__['conf'] == '':
+            self.__odApp__['conf'] = str(int(round(time()*1000)))+'.winconn'
         config = ConfigParser.SafeConfigParser()
         config.add_section(self.__wcSection__)
         for key in self.__odApp__:
@@ -110,6 +113,50 @@ class Commons:
     
     def delApp(self):
         os.unlink(self.__confdir__+self.__odApp__['conf'])
+        
+    def importRemmina(self, lAppNames):
+        lMap = [
+            ('name', 'name'),
+            ('server', 'server'),
+            ('username', 'user'),
+            ('domain', 'domain'),
+            ('sharefolder', 'folder'),
+            ('disableclipboard', 'clipboard'),
+            ('sound', 'sound'),
+        ]
+        remmconf = os.getenv('HOME') + '/.remmina/'
+        remmsect = 'remmina'
+        if not os.path.isdir(remmconf):
+            return
+
+        for fname in os.listdir(remmconf):
+            if fnmatch(fname, '*.remmina'):
+                self.init_App()
+                with open(remmconf+fname, 'r') as conf:
+                    config = ConfigParser.SafeConfigParser()
+                    config.readfp(conf)
+                    if config.has_option(remmsect, 'name'):
+                        lRemm = dict(config.items(remmsect))
+                        if lRemm['protocol'] != 'RDP' or lRemm['name'] in lAppNames:
+                            continue
+                        for remm, wc in lMap:
+                            if config.has_option(remmsect, remm):
+                                opt = config.get(remmsect, remm)
+                                if remm == 'server':
+                                    lSrv = opt.split(':', 1)
+                                    if len(lSrv) == 2:
+                                        self.__odApp__[wc] = lSrv[0]
+                                        self.__odApp__['port'] = lSrv[1]
+                                elif remm == 'sound':
+                                    print(opt)
+                                    if opt == 'off':
+                                        self.__odApp__[wc] = True
+                                elif isinstance(self.__odApp__[wc], bool):
+                                    self.__odApp__[wc] = config.getboolean(remmsect, remm)
+                                else:
+                                    self.__odApp__[wc] = opt
+                        yield self.__odApp__.values()
+
 
     def buildCmd(self):
         cmd = ['xfreerdp', '--ignore-certificate']

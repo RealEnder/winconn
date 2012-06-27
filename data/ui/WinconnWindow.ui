@@ -141,6 +141,7 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Import from Remmina</property>
                         <property name="use_underline">True</property>
+                        <signal name="activate" handler="miImportRemmina_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
