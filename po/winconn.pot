@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 09:29+0300\n"
+"POT-Creation-Date: 2012-06-27 17:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,161 +17,165 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../winconn/WinconnWindow.py:55
+#: ../winconn/WinconnWindow.py:54
 msgid "xfreerdp died unexpectedly"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:56
+#: ../winconn/WinconnWindow.py:55
 msgid "Success"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:57
+#: ../winconn/WinconnWindow.py:56
 msgid "Disconnect"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:58
+#: ../winconn/WinconnWindow.py:57
 msgid "Logoff"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:59
+#: ../winconn/WinconnWindow.py:58
 msgid "Idle timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:60
+#: ../winconn/WinconnWindow.py:59
 msgid "Logon timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:61
+#: ../winconn/WinconnWindow.py:60
 msgid "Connection replaced"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:62
+#: ../winconn/WinconnWindow.py:61
 msgid "Out of memory"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:63
+#: ../winconn/WinconnWindow.py:62
 msgid "Connection denied"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:64
+#: ../winconn/WinconnWindow.py:63
 msgid "Connection denied FIPS"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:65
+#: ../winconn/WinconnWindow.py:64
 msgid "Remote user does not have required privileges"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:66
+#: ../winconn/WinconnWindow.py:65
 msgid "Fresh credientials required"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:67
+#: ../winconn/WinconnWindow.py:66
 msgid "Disconnected by user"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:68
+#: ../winconn/WinconnWindow.py:67
 msgid "Internal"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:69
+#: ../winconn/WinconnWindow.py:68
 msgid "No license server"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:70
+#: ../winconn/WinconnWindow.py:69
 msgid "No license"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:71
+#: ../winconn/WinconnWindow.py:70
 msgid "Bad message from client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:72
+#: ../winconn/WinconnWindow.py:71
 msgid "HWID does not match"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:73
+#: ../winconn/WinconnWindow.py:72
 msgid "Bad client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:74
+#: ../winconn/WinconnWindow.py:73
 msgid "Can no finish protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:75
+#: ../winconn/WinconnWindow.py:74
 msgid "Clent ended protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:76
+#: ../winconn/WinconnWindow.py:75
 msgid "Bad client encryption"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:77
+#: ../winconn/WinconnWindow.py:76
 msgid "Can not upgrade protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:78
+#: ../winconn/WinconnWindow.py:77
 msgid "No remote connections allowed"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:79
+#: ../winconn/WinconnWindow.py:78
 msgid "RDP protocol error"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:80
+#: ../winconn/WinconnWindow.py:79
 msgid "Bad xfreerdp options. Consider filling a bug on Launchpad"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:81
+#: ../winconn/WinconnWindow.py:80
 msgid "xfreerdp out of memory"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:82
+#: ../winconn/WinconnWindow.py:81
 msgid "xfreerdp protocol error"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:83
+#: ../winconn/WinconnWindow.py:82
 msgid "Connection to server failed"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:97
+#: ../winconn/WinconnWindow.py:96
 #, python-format
 msgid "Unknown return code %i"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:100
+#: ../winconn/WinconnWindow.py:99
 msgid "Application not in RemoteApp list. Check help to fix this."
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:149
+#: ../winconn/WinconnWindow.py:148
 msgid "No application for execution selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:166
+#: ../winconn/WinconnWindow.py:165
 msgid "No application for deletion selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:169
+#: ../winconn/WinconnWindow.py:168
 #, python-format
 msgid "Are you sure you want to delete %s ?"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:176
+#: ../winconn/WinconnWindow.py:175
 msgid "No application to create desktop launcher selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:197
+#: ../winconn/WinconnWindow.py:196
 msgid "Could not create desktop launcher"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:289
+#: ../winconn/WinconnWindow.py:218
+msgid "Remmina import finnished"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:300
 msgid "Please check your application configuration"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:297
+#: ../winconn/WinconnWindow.py:307
 msgid "New application added successfully"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:305
+#: ../winconn/WinconnWindow.py:316
 msgid "Application updated successfully"
 msgstr ""
 
@@ -351,7 +355,7 @@ msgstr ""
 msgid "Execute saved application by name"
 msgstr ""
 
-#: ../winconn_lib/Commons.py:130
+#: ../winconn_lib/Commons.py:177
 msgid "Enter password for application: "
 msgstr ""
 
