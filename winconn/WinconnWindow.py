@@ -318,14 +318,14 @@ Type=Application
             self.ui.lStatus.set_text(_('Please check your application configuration'))
             return
 
-        if self.ui.tsApp.count_selected_rows() == 0:
+        tm, ti = self.ui.tsApp.get_selected()
+        if ti is None:
             # this is a new savefile
             self.common.setApp()
             self.ui.lsApps.append(self.common.get_App_opt())
             self.ui.lStatus.set_text(_('New application added successfully'))
         else:
             # this is current App update
-            tm, ti = self.ui.tsApp.get_selected()
             # get conf, must be always the last col
             self.common.set_App_opt('conf', tm.get_value(ti, tm.get_n_columns()-1))
             lApp = self.common.get_App_opt()
