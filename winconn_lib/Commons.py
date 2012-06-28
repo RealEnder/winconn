@@ -148,8 +148,7 @@ class Commons:
                                         self.__odApp__[wc] = lSrv[0]
                                         self.__odApp__['port'] = lSrv[1]
                                 elif remm == 'sound':
-                                    print(opt)
-                                    if opt == 'off':
+                                    if opt == 'off' or opt == 'remote':
                                         self.__odApp__[wc] = True
                                 elif isinstance(self.__odApp__[wc], bool):
                                     self.__odApp__[wc] = config.getboolean(remmsect, remm)

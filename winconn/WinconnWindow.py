@@ -115,11 +115,86 @@ class WinconnWindow(Window):
     __gtype_name__ = 'WinconnWindow'
     common = None
     t = None
+    sis = 'secondary-icon-stock'
     
     def readApps(self):
         for lApp in self.common.getApp():
             self.ui.lsApps.append(lApp)
+            
+    def initSecIco(self):
+        for e in self.ui.grid:
+            if isinstance(e, Gtk.Entry):
+                e.set_property(self.sis, None)
+    
+    def checkApp(self):
+        self.initSecIco()
         
+        # check our input values
+        valid = True
+        # Name
+        if self.common.get_App_opt('name') == '':
+            self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        # Name unique
+        lAppNames = []
+        for row in self.ui.lsApps:
+            lAppNames.append(row[0])
+            
+        if self.ui.tsApp.count_selected_rows() == 1:
+            # remove current name from list, we are updating
+            tm, ti = self.ui.tsApp.get_selected()
+            lAppNames.remove(tm.get_value(ti, 0))
+            
+        if self.common.get_App_opt('name') in lAppNames:
+            self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+
+        # Application
+        if self.common.get_App_opt('app') == '':
+            self.ui.eApp.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+            
+        # Server
+        if self.common.get_App_opt('server') == '':
+            self.ui.eSrv.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        # Port
+        try:
+            p = int(self.common.get_App_opt('port'))
+            if p <= 0 or p >= 65535:
+                raise ValueError
+        except ValueError:
+            self.ui.ePort.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        # User
+        if self.common.get_App_opt('user') == '':
+            self.ui.eUser.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        # Folder
+        if self.common.get_App_opt('folder') and not os.path.isdir(self.common.get_App_opt('folder')):
+            self.ui.eFolder.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        return valid
+
+    def showApp(self):
+        self.ui.eName.set_text(self.common.get_App_opt('name'))
+        self.ui.eApp.set_text(self.common.get_App_opt('app'))
+        self.ui.eSrv.set_text(self.common.get_App_opt('server'))
+        self.ui.ePort.set_text(self.common.get_App_opt('port'))
+        self.ui.eUser.set_text(self.common.get_App_opt('user'))
+        self.ui.ePass.set_text(self.common.get_App_opt('pass'))
+        self.ui.eDomain.set_text(self.common.get_App_opt('domain'))
+        self.ui.eFolder.set_text(self.common.get_App_opt('folder'))
+        self.ui.sComp.set_active(self.common.get_App_opt('compress'))
+        self.ui.sClip.set_active(self.common.get_App_opt('clipboard'))
+        self.ui.sSound.set_active(self.common.get_App_opt('sound'))
+        self.ui.sRFX.set_active(self.common.get_App_opt('remotefx'))
+
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the main window"""
         super(WinconnWindow, self).finish_initializing(builder)
@@ -148,21 +223,26 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('No application for execution selected'))
             return
 
+        if not self.checkApp():
+            self.ui.lStatus.set_text(_('Selected application has configuration errors'))
+            return
+
         cmd = self.common.buildCmd()
         if cmd is not None:
             self.t = self.cmdThread(self.common.get_App_opt('name'), cmd, self.ui.lStatus)
             self.t.start()
         
     def tbNew_clicked(self, widget):
+        self.initSecIco()
         self.ui.tsApp.unselect_all()
         self.common.init_App()
-        self.show_App()
+        self.showApp()
         self.ui.notebook.set_current_page(1)
         
     def tbDel_clicked(self, widget):
         tm, ti = self.ui.tsApp.get_selected()
         if ti is None:
-            self.ui.lStatus.set_text(_('No application for deletion selected'))
+            self.ui.lStatus.set_text(_('No application selected for deletion'))
             return
 
         response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % self.common.get_App_opt('name'))
@@ -172,7 +252,7 @@ class WinconnWindow(Window):
 
     def tbShortcut_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
-            self.ui.lStatus.set_text(_('No application to create desktop launcher selected'))
+            self.ui.lStatus.set_text(_('No application selected to create desktop launcher'))
             return
         
         appName = self.common.get_App_opt('name')
@@ -186,7 +266,7 @@ Terminal=false
 Type=Application
 '''
         
-        # create temp file for our new desktop launcher
+        # create temp dir for our new desktop launcher
         try:
             tdir = tempfile.mkdtemp(dir='/tmp')
             with open(tdir+'/'+'winconn-'+appName+'.desktop', 'w') as dfile:
@@ -209,8 +289,9 @@ Type=Application
         lAppNames = []
         for row in self.ui.lsApps:
             lAppNames.append(row[0])
-            
+
         for lApp in self.common.importRemmina(lAppNames):
+            # make sure we will save in new file
             sleep(0.001)
             self.common.setApp()
             self.ui.lsApps.append(self.common.get_App_opt())
@@ -218,8 +299,6 @@ Type=Application
         self.ui.lStatus.set_text(_('Remmina import finnished'))
 
     def bSave_clicked(self, widget, data=None):
-        sis = 'secondary-icon-stock'
-        
         #build our conf
         self.common.init_App()
         self.common.set_App_opt('name', self.ui.eName.get_text())
@@ -234,69 +313,8 @@ Type=Application
         self.common.set_App_opt('clipboard', self.ui.sClip.get_active())
         self.common.set_App_opt('sound', self.ui.sSound.get_active())
         self.common.set_App_opt('remotefx', self.ui.sRFX.get_active())
-           
-        # check our input values
-        valid = True
-        # Name
-        if self.common.get_App_opt('name') == '':
-            self.ui.eName.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        else:
-            self.ui.eName.set_property(sis, None)
-        
-        # Name unique
-        lAppNames = []
-        for row in self.ui.lsApps:
-            lAppNames.append(row[0])
-            
-        if self.ui.tsApp.count_selected_rows() == 1:
-            # remove current name from list, we are updating
-            tm, ti = self.ui.tsApp.get_selected()
-            lAppNames.remove(tm.get_value(ti, 0))
-            
-        if self.common.get_App_opt('name') in lAppNames:
-            self.ui.eName.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
 
-        # Application
-        if self.common.get_App_opt('app') == '':
-            self.ui.eApp.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        else:
-            self.ui.eApp.set_property(sis, None)
-            
-        # Server
-        if self.common.get_App_opt('server') == '':
-            self.ui.eSrv.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        else:
-            self.ui.eSrv.set_property(sis, None)
-        
-        # Port
-        try:
-            p = int(self.common.get_App_opt('port'))
-            if p <= 0 or p >= 65535:
-                raise ValueError
-            self.ui.ePort.set_property(sis, None)
-        except ValueError:
-            self.ui.ePort.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        
-        # User
-        if self.common.get_App_opt('user') == '':
-            self.ui.eUser.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        else:
-            self.ui.eUser.set_property(sis, None)
-        
-        # Folder
-        if self.common.get_App_opt('folder') and not os.path.isdir(self.common.get_App_opt('folder')):
-            self.ui.eFolder.set_property(sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
-        else:
-            self.ui.eFolder.set_property(sis, None)
-        
-        if not valid:
+        if not self.checkApp():
             self.ui.lStatus.set_text(_('Please check your application configuration'))
             return
 
@@ -315,20 +333,6 @@ Type=Application
             self.common.setApp()
             self.ui.lStatus.set_text(_('Application updated successfully'))
 
-    def show_App(self):
-        self.ui.eName.set_text(self.common.get_App_opt('name'))
-        self.ui.eApp.set_text(self.common.get_App_opt('app'))
-        self.ui.eSrv.set_text(self.common.get_App_opt('server'))
-        self.ui.ePort.set_text(self.common.get_App_opt('port'))
-        self.ui.eUser.set_text(self.common.get_App_opt('user'))
-        self.ui.ePass.set_text(self.common.get_App_opt('pass'))
-        self.ui.eDomain.set_text(self.common.get_App_opt('domain'))
-        self.ui.eFolder.set_text(self.common.get_App_opt('folder'))
-        self.ui.sComp.set_active(self.common.get_App_opt('compress'))
-        self.ui.sClip.set_active(self.common.get_App_opt('clipboard'))
-        self.ui.sSound.set_active(self.common.get_App_opt('sound'))
-        self.ui.sRFX.set_active(self.common.get_App_opt('remotefx'))
-
     def tsApp_changed(self, widget):
         tm, ti = self.ui.tsApp.get_selected()
         if ti is None:
@@ -338,8 +342,8 @@ Type=Application
         for i in range(0, tm.get_n_columns()):
             self.common.set_App_opt(i, tm.get_value(ti, i))
 
-        self.show_App()
-
+        self.showApp()
+        self.checkApp()
         self.ui.notebook.set_current_page(1)
         self.ui.lStatus.set_text('')
         

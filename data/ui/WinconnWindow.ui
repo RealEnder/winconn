@@ -462,7 +462,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-file</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application to execute. Avoid using ":"</property>
-                        <property name="secondary_icon_tooltip_text" translatable="yes">Application can't be empty. Also you cant use : character in it</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Application can't be empty. Also you can't use : character in it</property>
                         <property name="placeholder_text">cmd</property>
                       </object>
                       <packing>
