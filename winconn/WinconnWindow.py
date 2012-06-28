@@ -193,6 +193,7 @@ class WinconnWindow(Window):
         self.ui.sComp.set_active(self.common.get_App_opt('compress'))
         self.ui.sClip.set_active(self.common.get_App_opt('clipboard'))
         self.ui.sSound.set_active(self.common.get_App_opt('sound'))
+        self.ui.sPrinter.set_active(self.common.get_App_opt('printer'))
         self.ui.sRFX.set_active(self.common.get_App_opt('remotefx'))
 
     def finish_initializing(self, builder): # pylint: disable=E1002
@@ -335,6 +336,7 @@ Type=Application
         self.common.set_App_opt('compress', self.ui.sComp.get_active())
         self.common.set_App_opt('clipboard', self.ui.sClip.get_active())
         self.common.set_App_opt('sound', self.ui.sSound.get_active())
+        self.common.set_App_opt('printer', self.ui.sPrinter.get_active())
         self.common.set_App_opt('remotefx', self.ui.sRFX.get_active())
 
         if not self.checkApp():

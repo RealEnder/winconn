@@ -53,6 +53,7 @@ class Commons:
             ('compress', False),
             ('clipboard', True),
             ('sound', False),
+            ('printer', False),
             ('remotefx', False),
             ('conf', '')
         ])
@@ -122,7 +123,8 @@ class Commons:
             ('domain', 'domain'),
             ('sharefolder', 'folder'),
             ('disableclipboard', 'clipboard'),
-            ('sound', 'sound')
+            ('sound', 'sound'),
+            ('shareprinter', 'printer')
         ]
         remmconf = os.getenv('HOME') + '/.remmina/'
         remmsect = 'remmina'
@@ -147,9 +149,13 @@ class Commons:
                                     if len(lSrv) == 2:
                                         self.__odApp__[wc] = lSrv[0]
                                         self.__odApp__['port'] = lSrv[1]
+                                    else:
+                                        self.__odApp__[wc] = opt
                                 elif remm == 'sound':
                                     if opt == 'off' or opt == 'remote':
                                         self.__odApp__[wc] = True
+                                elif remm == 'shareprinter':
+                                    self.__odApp__[wc] = not config.getboolean(remmsect, remm)
                                 elif isinstance(self.__odApp__[wc], bool):
                                     self.__odApp__[wc] = config.getboolean(remmsect, remm)
                                 else:
@@ -166,6 +172,7 @@ class Commons:
             ('compression', 'compress'),
             ('redirectclipboard', 'clipboard'),
             ('audiomode', 'sound'),
+            ('redirectprinters', 'printer'),
             ('redirectdirectx', 'remotefx')
         ])
         with open(rdpfile, 'r') as frdp:
@@ -179,7 +186,7 @@ class Commons:
             ll[2] = ll[2].replace("\n", '')
 
             if  lMap.has_key(ll[0]):
-                if lMap[ll[0]] in ('compress', 'clipboard', 'remotefx'):
+                if lMap[ll[0]] in ('compress', 'clipboard', 'printer', 'remotefx'):
                     if ll[2] == '1':
                         self.__odApp__[lMap[ll[0]]] = False
                     else:
@@ -244,6 +251,10 @@ class Commons:
         # sound
         if not self.__odApp__['sound']:
             cmd.extend(['--plugin', 'rdpsnd'])
+        # printer
+        if not self.__odApp__['printer']:
+            cmd.extend(['--plugin', 'rdpdr', '--data', 'printer'])
+        
         # folder
         if self.__odApp__['folder'] != '':
             cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+self.__odApp__['folder'], '--'])
