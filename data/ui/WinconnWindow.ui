@@ -121,7 +121,7 @@
                 <property name="label" translatable="yes">_Tools</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu1">
+                  <object class="GtkMenu" id="mTools">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -151,6 +151,7 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Import from RDP file</property>
                         <property name="use_underline">True</property>
+                        <signal name="activate" handler="miImportRDP_activate" swapped="no"/>
                       </object>
                     </child>
                   </object>

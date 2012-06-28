@@ -279,11 +279,6 @@ Type=Application
 
     def tbQuit_clicked(self, widget):
         self.destroy()
-
-    def bCancel_clicked(self, widget):
-        self.ui.notebook.set_current_page(0)
-        self.common.init_App()
-        self.ui.tsApp.unselect_all()
     
     def miImportRemmina_activate(self, widget):
         lAppNames = []
@@ -297,6 +292,34 @@ Type=Application
             self.ui.lsApps.append(self.common.get_App_opt())
 
         self.ui.lStatus.set_text(_('Remmina import finnished'))
+        
+    def miImportRDP_activate(self, widget):
+        fcd = Gtk.FileChooserDialog(title = _('Select RDP file to import'),
+                                    buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                    Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+        ff = Gtk.FileFilter()
+        ff.set_name(_('Windows Remote Desktop files'))
+        ff.add_pattern('*.rdp')
+        fcd.add_filter(ff)
+
+        response = fcd.run()
+        rdpfile = fcd.get_filename()
+        fcd.destroy()
+
+        if rdpfile is None:
+            return
+
+        lAppNames = []
+        for row in self.ui.lsApps:
+            lAppNames.append(row[0])
+        
+        if self.common.importRDP(lAppNames, rdpfile):
+            self.common.setApp()
+            self.ui.lsApps.append(self.common.get_App_opt())
+            self.ui.lStatus.set_text(_('RDP import succeessful'))
+        else:
+            self.ui.lStatus.set_text(_('RDP import unsuccessful'))
 
     def bSave_clicked(self, widget, data=None):
         #build our conf
@@ -333,6 +356,11 @@ Type=Application
                 self.ui.lsApps.set_value(ti, i, lApp[i])
             self.common.setApp()
             self.ui.lStatus.set_text(_('Application updated successfully'))
+
+    def bCancel_clicked(self, widget):
+        self.ui.notebook.set_current_page(0)
+        self.common.init_App()
+        self.ui.tsApp.unselect_all()
 
     def tsApp_changed(self, widget):
         tm, ti = self.ui.tsApp.get_selected()

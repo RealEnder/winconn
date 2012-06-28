@@ -122,7 +122,7 @@ class Commons:
             ('domain', 'domain'),
             ('sharefolder', 'folder'),
             ('disableclipboard', 'clipboard'),
-            ('sound', 'sound'),
+            ('sound', 'sound')
         ]
         remmconf = os.getenv('HOME') + '/.remmina/'
         remmsect = 'remmina'
@@ -156,7 +156,53 @@ class Commons:
                                     self.__odApp__[wc] = opt
                         yield self.__odApp__.values()
 
+    def importRDP(self, lAppNames, rdpfile):
+        lMap = dict([
+            ('remoteapplicationname', 'name'),
+            ('remoteapplicationprogram', 'app'),
+            ('full address', 'server'),
+            ('server port', 'port'),
+            ('username', 'user'),
+            ('compression', 'compress'),
+            ('redirectclipboard', 'clipboard'),
+            ('audiomode', 'sound'),
+            ('redirectdirectx', 'remotefx')
+        ])
+        with open(rdpfile, 'r') as frdp:
+            self.init_App()
+            lrdp = frdp.readlines()
+            
+        for opt in lrdp:
+            ll = opt.split(':', 2)
+            if len(ll) != 3:
+                continue
+            ll[2] = ll[2].replace("\n", '')
 
+            if  lMap.has_key(ll[0]):
+                if lMap[ll[0]] in ('compress', 'clipboard', 'remotefx'):
+                    if ll[2] == '1':
+                        self.__odApp__[lMap[ll[0]]] = False
+                    else:
+                        self.__odApp__[lMap[ll[0]]] = True
+                elif lMap[ll[0]] == 'sound':
+                    if ll[2] == '0':
+                        self.__odApp__[lMap[ll[0]]] = False
+                    else:
+                        self.__odApp__[lMap[ll[0]]] = True
+                else:
+                    self.__odApp__[lMap[ll[0]]] = ll[2]
+
+        if self.__odApp__['server'] == '':
+            return False
+
+        if self.__odApp__['name'] == '':
+            self.__odApp__['name'] = os.path.basename(rdpfile)
+            
+        if self.__odApp__['name'] in lAppNames:
+            return False
+            
+        return True
+    
     def buildCmd(self):
         cmd = ['xfreerdp', '--ignore-certificate']
         # compress
@@ -186,7 +232,7 @@ class Commons:
                 self.__odApp__['pass'] = userPass
             else:
                 return None
-            
+
         cmd.extend(['-p', self.__odApp__['pass']])
         # domain
         if self.__odApp__['domain'] != '':
