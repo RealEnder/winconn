@@ -325,6 +325,7 @@ Type=Application
             self.ui.lStatus.set_text(_('New application added successfully'))
         else:
             # this is current App update
+            tm, ti = self.ui.tsApp.get_selected()
             # get conf, must be always the last col
             self.common.set_App_opt('conf', tm.get_value(ti, tm.get_n_columns()-1))
             lApp = self.common.get_App_opt()
