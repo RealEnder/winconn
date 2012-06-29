@@ -1,14 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <!-- interface-requires about_winconn_dialog 1.0 -->
   <object class="AboutWinconnDialog" id="about_winconn_dialog">
-    <property translatable="yes" name="copyright">Copyright (C) 2012 Alex Stanev &lt;alex@stanev.org&gt;</property><property name="can_focus">False</property>
+    <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">About WinConn</property>
     <property name="icon">../media/winconn.png</property>
     <property name="type_hint">normal</property>
     <property name="program_name">WinConn</property>
     <property name="version">0.1-public14</property>
+    <property name="copyright" translatable="yes">Copyright (C) 2012 Alex Stanev &lt;alex@stanev.org&gt;</property>
+    <property name="comments" translatable="yes">WinConn development is kindly supported by Synapse Ideas</property>
     <property name="website">https://launchpad.net/winconn</property>
     <property name="website_label" translatable="yes">WinConn site</property>
     <property name="license" translatable="yes"># Copyright (C) 2012 Alex Stanev &lt;alex@stanev.org&gt;
@@ -48,6 +51,30 @@
         </child>
         <child>
           <placeholder/>
+        </child>
+        <child>
+          <object class="GtkLinkButton" id="lbSyndeas">
+            <property name="use_action_appearance">False</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="has_tooltip">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="relief">none</property>
+            <property name="uri">http://www.syndeas.com</property>
+            <child>
+              <object class="GtkImage" id="iSyndeas">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">../media/syndeas.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
         </child>
       </object>
     </child>
