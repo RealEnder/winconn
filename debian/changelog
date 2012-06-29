@@ -1,3 +1,9 @@
+winconn (0.2.2) precise; urgency=low
+
+  * New release.
+
+ -- Alex Stanev <alex@stanev.org>  Fri, 29 Jun 2012 17:11:33 +0300
+
 winconn (0.2.1) precise; urgency=low
 
   * New release.
