@@ -254,13 +254,15 @@ class Commons:
         # printer
         if not self.__odApp__['printer']:
             cmd.extend(['--plugin', 'rdpdr', '--data', 'printer'])
-        
         # folder
         if self.__odApp__['folder'] != '':
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+self.__odApp__['folder'], '--'])
+            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+self.__odApp__['folder']])
+        # --
+        if not (self.__odApp__['printer'] or self.__odApp__['folder']):
+            cmd.append('--')
         # app
-        cmd.extend(['--app', '--plugin', 'rail.so', '--data', self.__odApp__['app']])
+        cmd.extend(['--app', '--plugin', 'rail.so', '--data', self.__odApp__['app'], '--'])
         # server
-        cmd.extend(['--', self.__odApp__['server']])
+        cmd.append(self.__odApp__['server'])
 
         return cmd
