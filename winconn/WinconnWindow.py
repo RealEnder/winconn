@@ -261,8 +261,8 @@ class WinconnWindow(Window):
         template = '''[Desktop Entry]
 Name=%s
 Comment=WinConn RemoteApp
-Exec=winconn -e "%s"
-Icon=/usr/share/winconn/media/winconn.png
+Exec=/opt/extras.ubuntu.com/winconn/bin/winconn -e "%s"
+Icon=/opt/extras.ubuntu.com/winconn/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
 '''
