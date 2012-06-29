@@ -1,3 +1,32 @@
+winconn (0.2) precise; urgency=low
+
+  * typos
+  * Help file
+  * add supporters in about
+  * version
+  * Implement local printer redirection
+  * Implement RDP file import
+  * reorder
+  * Fix save
+  * Improve application papameter checks
+  * quickly blah
+  * fix names with spaces for app names with spaces
+  * remmina import
+  * for release
+  * version bump
+  * quickly
+  * create desktop launcher
+  * Add new ui elements
+  * implement app profile execution on commandline
+  * add new app to launcher
+  * make sure we have unique app names
+  * add dbus service to handle single instance and new app creation
+  * fix hang on exit from toolbar button
+  * 0.1
+  * packaging fixes
+
+ -- Alex Stanev <alex@stanev.org>  Fri, 29 Jun 2012 16:55:03 +0300
+
 winconn (0.1-public14) precise; urgency=low
 
   * New release.
