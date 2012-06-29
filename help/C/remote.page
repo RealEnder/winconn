@@ -1,0 +1,50 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="remote">
+
+<info>
+  <link type="guide" xref="index#contents"/>
+  <credit type="author">
+    <name>Alex Stanev</name>
+    <email>alex@stanev.org</email>
+    <years>2012</years>
+  </credit>
+  <desc>RemoteApp feature have to be enabled in order to work with <app>WinConn</app></desc>
+</info>
+
+<title>Configuration of remote windows machine</title>
+    <section id="first">
+        <title>RemoteApp general configuration</title>
+        <p>There are many online resources for RemoteApp in different scenarios. Please check <link href="http://social.technet.microsoft.com/wiki/contents/articles/275.wiki-technologies-portal.aspx#R">here</link> for more information.</p>
+    </section>
+    <section id="second">
+        <title>RemoteApp enabled applications</title>
+        <p>The default setting is to manually enable RemoteApp for every application.</p>
+        <p>On your remote windows machine(tested with win7), run regedit(you will need Administrator privilegies) and under HKLocalMachine\SOFTWARE\Policies\Microsoft\Windows NT add a key "Terminal Services". Under that, add a DWORD32 value named "fAllowUnlistedRemotePrograms" and set the value to 1.</p>
+        <note style="tip">
+        <title>.reg file</title>
+        <code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services]
+"fAllowUnlistedRemotePrograms"=dword:00000001
+        </code>
+        </note>
+    </section>
+    <section id="third"> 
+        <title>Supported RDP implementations</title>
+        <list>
+        <item><p>Windows Server 2008+</p></item>
+        <item><p>Windows 7</p></item>
+        <item><p>Windows Vista SP1+</p></item>
+        <item><p>Windows XP SP3+</p></item>
+        </list>
+    </section>
+    <section id="forth">
+        <title>Usefull resources</title>
+        <list>
+        <item><p><link href="http://www.kimknight.net/remoteapptool">RemoteApp Tool</link></p></item>
+        <item><p><link href="http://blog.stealthpuppy.com/virtualisation/remoteapp-for-windows-xp-and-windows-vista-the-missing-pieces/">RemoteApp for Windows XP and Windows Vista, the missing pieces</link></p></item>
+        </list>
+    </section>
+</page>

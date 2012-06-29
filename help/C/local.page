@@ -1,0 +1,55 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      type="topic"
+      id="local">
+
+<info>
+  <link type="guide" xref="index#contents"/>
+  <credit type="author">
+    <name>Alex Stanev</name>
+    <email>alex@stanev.org</email>
+    <years>2012</years>
+  </credit>
+  <desc>This topic helps you choose your remote application configuration</desc>
+</info>
+
+<title>Configuration of remote application</title>
+<p>There are several application options you need to fill in in order to create a new remote application profile.</p>
+<section id="first">
+  <title>Application options</title>
+  <list>
+  <item><title>Name</title>
+    <p>Unique profile name</p></item>
+  <item><title>Application</title>
+    <p>Executable name of remote application.</p>
+    <p>There is extended syntax of this field in form "command_name:path_to_command:options". So for example you can use "iexplore::syndeas.com" to open a site in IE.</p>
+    <note style="bug">
+      <p>In FreeRDP 1.0.1 there is currently an issue where the usage of the colon ‘:’ is not possible. If you are experiencing such issues, use environment variables like %windir% to work around the problem.</p>
+    </note>
+    </item>
+  <item><title>Server, Port</title>
+    <p>Remote server, the default port is 3389/tcp</p></item>
+  <item><title>Username, Password, Domain</title>
+    <p>Remote credientials.</p>
+    <note style="warning">
+      <p>The password is stored in cleartext in user's home. You can leave this field empty and <app>WinConn</app> will ask you for the user password.</p>
+    </note>
+    </item>
+  <item><title>Folder to share</title>
+    <p>Local folder to be shared on remote machine.</p></item>
+  <item><title>Switch options</title>
+    <p>You can disable certain features. This can make you applications more responsive or may workaround against some problems/bugs.</p>
+        <note style="bug">
+      <p>In FreeRDP 1.0.1 there is currently an issue with clipboard sharing with RemoteApp.</p>
+    </note>
+    </item>
+</list>
+</section>
+<section id="second">
+  <title>Tools::Create desktop launcher</title>
+<p>This places selected application on the desktop.</p>
+</section>
+<section id="third">
+  <title>Tools::Remmina and RDP import</title>
+<p>You can import RDP sessions from Remmina or single windows rdp file. <app>WinConn</app> recognizes most usefull options and creates new application profiles. Passwords are not imported.</p>
+</section>
+</page>
