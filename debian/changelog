@@ -1,3 +1,9 @@
+winconn (0.2.4) precise; urgency=low
+
+  * Fix remote app at last
+
+ -- Alex Stanev <alex@stanev.org>  Fri, 29 Jun 2012 23:20:41 +0300
+
 winconn (0.2.3) precise; urgency=low
 
   * fix desktop launcher to run from /opt
