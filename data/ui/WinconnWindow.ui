@@ -212,6 +212,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Execute</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Execute</property>
                 <property name="use_underline">True</property>
@@ -228,6 +229,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">New</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">New</property>
                 <property name="use_underline">True</property>
@@ -244,6 +246,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Delete</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Delete</property>
                 <property name="use_underline">True</property>
@@ -272,8 +275,9 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Create desktop launcher</property>
                 <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">Create shortcut</property>
+                <property name="label" translatable="yes">Create desktop launcher</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">user-desktop</property>
                 <signal name="clicked" handler="tbShortcut_clicked" swapped="no"/>
@@ -300,6 +304,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Quit</property>
                 <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Quit</property>
                 <property name="use_underline">True</property>
