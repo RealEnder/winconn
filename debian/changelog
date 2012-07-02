@@ -1,3 +1,14 @@
+winconn (0.2.5) precise; urgency=low
+
+  * Better resize of main window
+  * Add toolbar tooltips
+  * Link new WinConn site in about dialog
+  * Move to new format string syntax
+  * Workaround case with % in app
+  * bulgarian translation
+
+ -- Alex Stanev <alex@stanev.org>  Mon, 02 Jul 2012 19:22:01 +0300
+
 winconn (0.2.4) precise; urgency=low
 
   * Fix remote app at last
