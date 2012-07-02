@@ -97,6 +97,8 @@ class WinconnWindow(Window):
                 
             if ''.join(self.stout).find('RAIL_EXEC_E_NOT_IN_ALLOWLIST') != -1:
                 s = _('Application not in RemoteApp list. Check help to fix this.')
+            elif ''.join(self.stout).find('RAIL_EXEC_E_FAIL') != -1:
+                s = _('Could not execute remote application.')
                 
             self.widget.set_text('%s: %s' % (self.app, s))
             

@@ -92,7 +92,8 @@ class Commons:
                             if isinstance(self.__odApp__[key], bool):
                                 self.__odApp__[key] = config.getboolean(self.__wcSection__, key)
                             else:
-                                self.__odApp__[key] = config.get(self.__wcSection__, key)
+                                val = config.get(self.__wcSection__, key)
+                                self.__odApp__[key] = val.replace('%%', '%')
                         except ConfigParser.NoSectionError:
                             usable = False
                             break
@@ -107,7 +108,8 @@ class Commons:
         config = ConfigParser.SafeConfigParser()
         config.add_section(self.__wcSection__)
         for key in self.__odApp__:
-            config.set(self.__wcSection__, key, str(self.__odApp__[key]))
+            val = str(self.__odApp__[key]).replace('%', '%%')
+            config.set(self.__wcSection__, key, val)
         
         with open(self.__confdir__+self.__odApp__['conf'],'w') as cfgfile:
             config.write(cfgfile)
@@ -256,7 +258,7 @@ class Commons:
             cmd.extend(['--plugin', 'rdpdr', '--data', 'printer'])
         # folder
         if self.__odApp__['folder'] != '':
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:'+self.__odApp__['folder']])
+            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:{0}'.format(self.__odApp__['folder'])])
         # --
         if not self.__odApp__['printer'] or self.__odApp__['folder'] != '':
             cmd.append('--')
