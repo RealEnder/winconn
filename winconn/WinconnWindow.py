@@ -93,14 +93,14 @@ class WinconnWindow(Window):
             try:
                 s = self.__xfec__[rc]
             except KeyError:
-                s = _('Unknown return code %i' % rc)
+                s = _('Unknown return code {0}'.format(rc))
                 
             if ''.join(self.stout).find('RAIL_EXEC_E_NOT_IN_ALLOWLIST') != -1:
                 s = _('Application not in RemoteApp list. Check help to fix this.')
             elif ''.join(self.stout).find('RAIL_EXEC_E_FAIL') != -1:
                 s = _('Could not execute remote application.')
                 
-            self.widget.set_text('%s: %s' % (self.app, s))
+            self.widget.set_text('{0}: {1}'.format(self.app, s))
             
             return False
 
@@ -248,7 +248,7 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('No application selected for deletion'))
             return
 
-        response = prompts.yes_no('WinConn', _("Are you sure you want to delete %s ?") % self.common.get_App_opt('name'))
+        response = prompts.yes_no('WinConn', _("Are you sure you want to delete {0} ?").format(self.common.get_App_opt('name')))
         if response == Gtk.ResponseType.YES:
             self.common.delApp()
             self.ui.lsApps.remove(ti)
@@ -261,9 +261,9 @@ class WinconnWindow(Window):
         appName = self.common.get_App_opt('name')
         # yeah, it's ugly
         template = '''[Desktop Entry]
-Name=%s
+Name={0}
 Comment=WinConn RemoteApp
-Exec=/opt/extras.ubuntu.com/winconn/bin/winconn -e "%s"
+Exec=/opt/extras.ubuntu.com/winconn/bin/winconn -e "{0}"
 Icon=/opt/extras.ubuntu.com/winconn/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
@@ -273,7 +273,7 @@ Type=Application
         try:
             tdir = tempfile.mkdtemp(dir='/tmp')
             with open(tdir+'/'+'winconn-'+appName+'.desktop', 'w') as dfile:
-                dfile.write(template % (appName, appName))
+                dfile.write(template.format(appName))
             rc = call(['xdg-desktop-icon', 'install', tdir+'/'+'winconn-'+appName+'.desktop'])
             if rc:
                 self.ui.lStatus.set_text(_('Could not create desktop launcher'))
