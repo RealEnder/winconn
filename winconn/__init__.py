@@ -24,8 +24,8 @@ from gi.repository import Gtk, GObject # pylint: disable=E0611
 import dbus, dbus.service, dbus.glib
 
 from winconn import WinconnWindow
+from winconn import Commons
 from winconn_lib import set_up_logging, get_version
-from winconn_lib import Commons
 
 from subprocess import Popen
 

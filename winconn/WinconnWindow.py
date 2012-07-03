@@ -27,6 +27,7 @@ logger = logging.getLogger('winconn')
 
 from winconn_lib import Window
 from winconn.AboutWinconnDialog import AboutWinconnDialog
+from winconn import Commons
 
 from collections import OrderedDict
 from time import sleep
@@ -40,7 +41,6 @@ from subprocess import Popen
 from subprocess import PIPE
 from subprocess import call
 from shutil import rmtree
-from winconn_lib import Commons
 
 from quickly import prompts
             
