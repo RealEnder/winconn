@@ -97,7 +97,7 @@ class Commons:
                             if isinstance(self.__odApp__[key], bool):
                                 self.__odApp__[key] = config.getboolean(self.__wcSection__, key)
                             else:
-                                val = config.get(self.__wcSection__, key)
+                                val = str(config.get(self.__wcSection__, key))
                                 self.__odApp__[key] = val.replace('%%', '%')
                         except ConfigParser.NoSectionError:
                             usable = False
@@ -156,7 +156,7 @@ class Commons:
                             continue
                         for remm, wc in lMap:
                             if config.has_option(remmsect, remm):
-                                opt = config.get(remmsect, remm)
+                                opt = str(config.get(remmsect, remm))
                                 if remm == 'server':
                                     lSrv = opt.split(':', 1)
                                     if len(lSrv) == 2:
