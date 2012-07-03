@@ -28,6 +28,7 @@ logger = logging.getLogger('winconn')
 from winconn_lib import Window
 from winconn.AboutWinconnDialog import AboutWinconnDialog
 from winconn import Commons
+#from winconn import indicator
 
 from collections import OrderedDict
 from time import sleep
@@ -133,7 +134,7 @@ class WinconnWindow(Window):
             if isinstance(e, Gtk.Entry):
                 e.set_property(self.sis, None)
     
-    def checkApp(self):
+    def checkApp(self, bypass=False):
         self.initSecIco()
         
         # check our input values
@@ -144,18 +145,19 @@ class WinconnWindow(Window):
             valid = False
         
         # Name unique
-        lAppNames = []
-        for row in self.ui.lsApps:
-            lAppNames.append(row[0])
-            
-        if self.ui.tsApp.count_selected_rows() == 1:
-            # remove current name from list, we are updating
-            tm, ti = self.ui.tsApp.get_selected()
-            lAppNames.remove(tm.get_value(ti, 0))
-            
-        if self.common.get_App_opt('name') in lAppNames:
-            self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
-            valid = False
+        if not bypass:
+            lAppNames = []
+            for row in self.ui.lsApps:
+                lAppNames.append(row[0])
+                
+            if self.ui.tsApp.count_selected_rows() == 1:
+                # remove current name from list, we are updating
+                tm, ti = self.ui.tsApp.get_selected()
+                lAppNames.remove(tm.get_value(ti, 0))
+                
+            if self.common.get_App_opt('name') in lAppNames:
+                self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+                valid = False
 
         # Application
         if self.common.get_App_opt('app') == '':
@@ -225,13 +227,15 @@ class WinconnWindow(Window):
         
         self.common = Commons.Commons()
         self.readApps()
+        self.indicator.rebuild_menu(self)
 
-    def tbExec_clicked(self, widget, row=None, data=None):
-        if self.ui.tsApp.count_selected_rows() == 0:
-            self.ui.lStatus.set_text(_('No application for execution selected'))
-            return
+    def tbExec_clicked(self, widget, bypass=False, row=None, data=None):
+        if not bypass:
+            if self.ui.tsApp.count_selected_rows() == 0:
+                self.ui.lStatus.set_text(_('No application for execution selected'))
+                return
 
-        if not self.checkApp():
+        if not self.checkApp(bypass):
             self.ui.lStatus.set_text(_('Selected application has configuration errors'))
             return
 
@@ -257,6 +261,7 @@ class WinconnWindow(Window):
         if response == Gtk.ResponseType.YES:
             self.common.delApp()
             self.ui.lsApps.remove(ti)
+            self.indicator.rebuild_menu(self)
 
     def tbShortcut_clicked(self, widget, row=None, data=None):
         if self.ui.tsApp.count_selected_rows() == 0:
@@ -301,6 +306,8 @@ Type=Application
             self.common.setApp()
             self.ui.lsApps.append(self.common.get_App_opt())
 
+        self.indicator.rebuild_menu(self)
+
         self.ui.lStatus.set_text(_('Remmina import finnished'))
         
     def miImportRDP_activate(self, widget):
@@ -327,6 +334,7 @@ Type=Application
         if self.common.importRDP(lAppNames, rdpfile):
             self.common.setApp()
             self.ui.lsApps.append(self.common.get_App_opt())
+            self.indicator.rebuild_menu(self)
             self.ui.lStatus.set_text(_('RDP import succeessful'))
         else:
             self.ui.lStatus.set_text(_('RDP import unsuccessful'))
@@ -367,6 +375,8 @@ Type=Application
                 self.ui.lsApps.set_value(ti, i, lApp[i])
             self.common.setApp()
             self.ui.lStatus.set_text(_('Application updated successfully'))
+            
+        self.indicator.rebuild_menu(self)
 
     def bCancel_clicked(self, widget):
         self.ui.notebook.set_current_page(0)
@@ -392,6 +402,19 @@ Type=Application
         if response == Gtk.ResponseType.OK:
             widget.set_text(path)
     
+    def winconn_show(self, widget):
+        self.present()
+    
     def winconn_window_destroy(self, widget):
         if self.t is not None:
             self.t.quit = True
+            
+    def run_app(self, widget):
+        app = widget.get_label()
+        for row in self.ui.lsApps:
+            if row[0] == app:
+                for i in range(0, self.ui.tvApps.get_n_columns()):
+                    self.common.set_App_opt(i, row[i])
+                break
+
+        self.tbExec_clicked(None, bypass=True)

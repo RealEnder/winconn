@@ -44,7 +44,7 @@ class WinconnService(dbus.service.Object):
     @dbus.service.method(dbus_interface='org.stanev.winconn')
     def new_app(self):
         self.app.tbNew_clicked(None)
-        self.app.show()
+        self.app.present()
 
 def parse_options():
     """Support for command line options"""
