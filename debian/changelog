@@ -1,3 +1,14 @@
+winconn (0.2.6) precise; urgency=low
+
+  * Add appindicator support
+  * pylint fixes
+  * Relocate Commons
+  * Consistent quiotes across source code
+  * Show main window on second run and exit
+  * Add some debug logging
+
+ -- Alex Stanev <alex@stanev.org>  Wed, 04 Jul 2012 00:49:35 +0300
+
 winconn (0.2.5) precise; urgency=low
 
   * Better resize of main window

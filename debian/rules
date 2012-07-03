@@ -7,7 +7,7 @@ else
 endif
 
 override_dh_auto_install:
-	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/winconn                 --install-data=/opt/extras.ubuntu.com/winconn                 --install-lib=/opt/extras.ubuntu.com/winconn
+	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/winconn/bin                 --install-data=/opt/extras.ubuntu.com/winconn                 --install-lib=/opt/extras.ubuntu.com/winconn
 
 override_dh_python2:
 	dh_python2 /opt/extras.ubuntu.com/winconn
