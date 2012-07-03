@@ -26,6 +26,9 @@ import ConfigParser
 from collections import OrderedDict
 from quickly import prompts
 
+import logging
+logger = logging.getLogger('winconn')
+
 class Commons:
     __confdir__ = ''
     __odApp__ = None
@@ -35,7 +38,9 @@ class Commons:
         self.__confdir__ = os.getenv('HOME') + '/.config/winconn/'
         if not os.path.isdir(self.__confdir__):
             os.makedirs(self.__confdir__)
-        
+
+        logger.debug('Config directory: %s', self.__confdir__)
+
 
     def get_conf(self):
         return self.__confdir__
@@ -111,10 +116,13 @@ class Commons:
             val = str(self.__odApp__[key]).replace('%', '%%')
             config.set(self.__wcSection__, key, val)
         
+        logger.debug('Write config to file: %s', self.__odApp__['conf'])
+        
         with open(self.__confdir__+self.__odApp__['conf'],'w') as cfgfile:
             config.write(cfgfile)
     
     def delApp(self):
+        logger.debug('Delete config file: %s', self.__confdir__+self.__odApp__['conf'])
         os.unlink(self.__confdir__+self.__odApp__['conf'])
         
     def importRemmina(self, lAppNames):
@@ -136,6 +144,9 @@ class Commons:
         for fname in os.listdir(remmconf):
             if fnmatch(fname, '*.remmina'):
                 self.init_App()
+                
+                logger.debug('Import from: %s', remmconf+fname)
+                
                 with open(remmconf+fname, 'r') as conf:
                     config = ConfigParser.SafeConfigParser()
                     config.readfp(conf)
@@ -162,6 +173,9 @@ class Commons:
                                     self.__odApp__[wc] = config.getboolean(remmsect, remm)
                                 else:
                                     self.__odApp__[wc] = opt
+
+                        logger.debug('Imported values: %s', self.__odApp__)
+
                         yield self.__odApp__.values()
 
     def importRDP(self, lAppNames, rdpfile):
@@ -177,6 +191,9 @@ class Commons:
             ('redirectprinters', 'printer'),
             ('redirectdirectx', 'remotefx')
         ])
+        
+        logger.debug('Import RDP file: %s', rdpfile)
+        
         with open(rdpfile, 'r') as frdp:
             self.init_App()
             lrdp = frdp.readlines()
@@ -209,7 +226,9 @@ class Commons:
             
         if self.__odApp__['name'] in lAppNames:
             return False
-            
+        
+        logger.debug('Imported values: %s', self.__odApp__)
+        
         return True
     
     def buildCmd(self):
@@ -266,5 +285,7 @@ class Commons:
         cmd.extend(['--app', '--plugin', 'rail.so', '--data', self.__odApp__['app'], '--'])
         # server
         cmd.append(self.__odApp__['server'])
+        
+        logger.debug(cmd)
 
         return cmd

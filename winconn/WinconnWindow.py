@@ -88,8 +88,13 @@ class WinconnWindow(Window):
             self.cmd = cmd
             self.widget = widget
             self.quit = False
+            
+            logger.debug('Init app: %s', app)
         
         def setStatus(self, rc):
+        
+            logger.debug('rc: %i', rc)
+            
             try:
                 s = self.__xfec__[rc]
             except KeyError:
@@ -268,6 +273,8 @@ Icon=/opt/extras.ubuntu.com/winconn/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
 '''
+        
+        logger.debug('Launcher for app: %s', appName)
         
         # create temp dir for our new desktop launcher
         try:
