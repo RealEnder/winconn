@@ -28,7 +28,7 @@ from winconn_lib.AboutDialog import AboutDialog
 
 # See winconn_lib.AboutDialog.py for more details about how this class works.
 class AboutWinconnDialog(AboutDialog):
-    __gtype_name__ = "AboutWinconnDialog"
+    __gtype_name__ = 'AboutWinconnDialog'
     
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the about dialog"""

@@ -253,7 +253,7 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('No application selected for deletion'))
             return
 
-        response = prompts.yes_no('WinConn', _("Are you sure you want to delete {0} ?").format(self.common.get_App_opt('name')))
+        response = prompts.yes_no('WinConn', _('Are you sure you want to delete {0} ?').format(self.common.get_App_opt('name')))
         if response == Gtk.ResponseType.YES:
             self.common.delApp()
             self.ui.lsApps.remove(ti)
