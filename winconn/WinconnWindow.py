@@ -126,8 +126,7 @@ class WinconnWindow(Window):
     common = None
     t = None
     sis = 'secondary-icon-stock'
-    ddir = None
-    
+
     def readApps(self):
         for lApp in self.common.getApp():
             self.ui.lsApps.append(lApp)
@@ -231,7 +230,6 @@ class WinconnWindow(Window):
         self.common = Commons.Commons()
         self.readApps()
         self.indicator.rebuild_menu(self)
-        self.ddir = os.path.join(GLib.get_user_data_dir(), 'applications')
 
     def tbExec_clicked(self, widget, bypass=False, row=None, data=None):
         if not bypass:
@@ -261,9 +259,11 @@ class WinconnWindow(Window):
             self.ui.lStatus.set_text(_('No application selected for deletion'))
             return
 
-        response = prompts.yes_no('WinConn', _('Are you sure you want to delete {0} ?').format(self.common.get_App_opt('name')))
+        appName = self.common.get_App_opt('name')
+        response = prompts.yes_no('WinConn', _('Are you sure you want to delete {0} ?').format(appName))
         if response == Gtk.ResponseType.YES:
-            self.del_desktop()
+            self.launcher(appName, inst=False)
+            self.launcher(appName, desktop=True, inst=False)
             self.common.delApp()
             self.ui.lsApps.remove(ti)
             self.indicator.rebuild_menu(self)
@@ -272,29 +272,26 @@ class WinconnWindow(Window):
         if self.ui.tsApp.count_selected_rows() == 0:
             self.ui.lStatus.set_text(_('No application selected to create desktop launcher'))
             return
-        
-        # Application name
-        appName = self.common.get_App_opt('name')
 
-        logger.debug('Launcher for app: %s', appName)
-        
-        # create temp dir for our new desktop launcher
-        try:
-            tdir = tempfile.mkdtemp(dir='/tmp')
-            with open(tdir+'/winconn-'+appName+'.desktop', 'w') as dfile:
-                dfile.write(self.build_desktop(appName))
-            rc = call(['xdg-desktop-icon', 'install', tdir+'/winconn-'+appName+'.desktop'])
-            if rc:
-                self.ui.lStatus.set_text(_('Could not create desktop launcher'))
-        finally:
-            rmtree(tdir)
+        appName = self.common.get_App_opt('name')
+        self.launcher(appName, desktop=True)
 
     def tbQuit_clicked(self, widget):
         self.destroy()
-
-    def build_desktop(self, appName):
-        # yeah, it's ugly
-        template = '''[Desktop Entry]
+        
+    def launcher(self, appName, desktop=False, inst=True):
+        ret = True
+        logger.debug('Launcher operation on app: %s', appName)
+        if desktop:
+            xdg_util = 'xdg-desktop-icon'
+        else:
+            xdg_util = 'xdg-desktop-menu'
+            
+        if inst:
+            # create temp dir for our new desktop launcher
+            try:
+                # yeah, it's ugly
+                template = '''[Desktop Entry]
 Name={0}
 Comment=WinConn RemoteApp {0}
 Exec={1} -e "{0}"
@@ -303,22 +300,34 @@ Terminal=false
 Type=Application
 '''
 
-        # Application icon
-        # FIXME: get real app icon in cache and link it here
-        icon_uri = get_media_file('winconn.png')
-        icon_path = icon_uri.replace('file:///', '')
-        
-        # executable path
-        exec_path = os.path.join(sys.path[0], sys.argv[0])
-        
-        return template.format(appName, exec_path, icon_path)
-        
-    def del_desktop(self, appName=''):
-        if appName == '':
-            appName = self.common.get_App_opt('name')
-        if os.path.exists(self.ddir+'/winconn-'+appName+'.desktop'):
-            os.unlink(self.ddir+'/winconn-'+appName+'.desktop')
-    
+                # Application icon
+                # FIXME: get real app icon in cache and link it here
+                icon_path = get_media_file('winconn.png').replace('file:///', '')
+                # executable path
+                exec_path = os.path.join(sys.path[0], sys.argv[0])
+                desktop_cont = template.format(appName, exec_path, icon_path)
+                
+                tdir = tempfile.mkdtemp(dir='/tmp')
+                with open(tdir+'/winconn-application-'+appName+'.desktop', 'w') as dfile:
+                    dfile.write(desktop_cont)
+                rc = call([xdg_util, 'install', tdir+'/winconn-application-'+appName+'.desktop'])
+                if rc:
+                    ret = False
+            except Exception as e:
+                ret = False
+                logger.debug('Install exception: %s', e)
+            rmtree(tdir)
+        else:
+            try:
+                rc = call([xdg_util, 'uninstall', 'winconn-application-'+appName+'.desktop'])
+                if rc:
+                    ret = False
+            except Exception as e:
+                ret = False
+                logger.debug('Uninstall exception: %s', e)
+
+        return ret
+
     def miImportRemmina_activate(self, widget):
         lAppNames = []
         for row in self.ui.lsApps:
@@ -365,7 +374,7 @@ Type=Application
 
     def bSave_clicked(self, widget, data=None):
         # Save app name for later
-        old_app_name = self.common.get_App_opt('name')
+        old_appName = self.common.get_App_opt('name')
 
         # Build our conf
         self.common.init_App()
@@ -405,14 +414,10 @@ Type=Application
         
         # Put app in menu, remove old if name changed
         appName = self.common.get_App_opt('name')
-        if old_app_name != appName:
-            self.del_desktop(old_app_name)
+        if old_appName != appName:
+            self.launcher(old_appName, inst=False)
         
-        with open(self.ddir+'/winconn-'+appName+'.desktop', 'w') as dfile:
-            dfile.write(self.build_desktop(appName))
-        
-        os.chmod(self.ddir+'/winconn-'+appName+'.desktop', 0755)
-            
+        self.launcher(appName)            
         self.indicator.rebuild_menu(self)
 
     def bCancel_clicked(self, widget):
