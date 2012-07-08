@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 17:51+0300\n"
+"POT-Creation-Date: 2012-07-08 15:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,165 +17,187 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../winconn/WinconnWindow.py:54
+#: ../winconn/WinconnWindow.py:57
 msgid "xfreerdp died unexpectedly"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:55
+#: ../winconn/WinconnWindow.py:58
 msgid "Success"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:56
+#: ../winconn/WinconnWindow.py:59
 msgid "Disconnect"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:57
+#: ../winconn/WinconnWindow.py:60
 msgid "Logoff"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:58
+#: ../winconn/WinconnWindow.py:61
 msgid "Idle timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:59
+#: ../winconn/WinconnWindow.py:62
 msgid "Logon timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:60
+#: ../winconn/WinconnWindow.py:63
 msgid "Connection replaced"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:61
+#: ../winconn/WinconnWindow.py:64
 msgid "Out of memory"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:62
+#: ../winconn/WinconnWindow.py:65
 msgid "Connection denied"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:63
+#: ../winconn/WinconnWindow.py:66
 msgid "Connection denied FIPS"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:64
+#: ../winconn/WinconnWindow.py:67
 msgid "Remote user does not have required privileges"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:65
+#: ../winconn/WinconnWindow.py:68
 msgid "Fresh credientials required"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:66
+#: ../winconn/WinconnWindow.py:69
 msgid "Disconnected by user"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:67
+#: ../winconn/WinconnWindow.py:70
 msgid "Internal"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:68
+#: ../winconn/WinconnWindow.py:71
 msgid "No license server"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:69
+#: ../winconn/WinconnWindow.py:72
 msgid "No license"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:70
+#: ../winconn/WinconnWindow.py:73
 msgid "Bad message from client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:71
+#: ../winconn/WinconnWindow.py:74
 msgid "HWID does not match"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:72
+#: ../winconn/WinconnWindow.py:75
 msgid "Bad client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:73
-msgid "Can no finish protocol"
-msgstr ""
-
-#: ../winconn/WinconnWindow.py:74
-msgid "Clent ended protocol"
-msgstr ""
-
-#: ../winconn/WinconnWindow.py:75
-msgid "Bad client encryption"
-msgstr ""
-
 #: ../winconn/WinconnWindow.py:76
-msgid "Can not upgrade protocol"
+msgid "Can not finish protocol"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:77
-msgid "No remote connections allowed"
+msgid "Client ended protocol"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:78
-msgid "RDP protocol error"
+msgid "Bad client encryption"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:79
-msgid "Bad xfreerdp options. Consider filling a bug on Launchpad"
+msgid "Can not upgrade protocol"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:80
-msgid "xfreerdp out of memory"
+msgid "No remote connections allowed"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:81
-msgid "xfreerdp protocol error"
+msgid "RDP protocol error"
 msgstr ""
 
 #: ../winconn/WinconnWindow.py:82
+msgid "Bad xfreerdp options. Consider filling a bug on Launchpad"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:83
+msgid "xfreerdp out of memory"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:84
+msgid "xfreerdp protocol error"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:85
 msgid "Connection to server failed"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:96
-#, python-format
-msgid "Unknown return code %i"
+#: ../winconn/WinconnWindow.py:104
+msgid "Unknown return code {0}"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:99
+#: ../winconn/WinconnWindow.py:107
 msgid "Application not in RemoteApp list. Check help to fix this."
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:148
+#: ../winconn/WinconnWindow.py:109
+msgid "Could not execute remote application."
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:239
 msgid "No application for execution selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:165
-msgid "No application for deletion selected"
+#: ../winconn/WinconnWindow.py:243
+msgid "Selected application has configuration errors"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:168
-#, python-format
-msgid "Are you sure you want to delete %s ?"
+#: ../winconn/WinconnWindow.py:261
+msgid "No application selected for deletion"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:175
-msgid "No application to create desktop launcher selected"
+#: ../winconn/WinconnWindow.py:264
+msgid "Are you sure you want to delete {0} ?"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:196
+#: ../winconn/WinconnWindow.py:273
+msgid "No application selected to create desktop launcher"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:288
 msgid "Could not create desktop launcher"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:218
+#: ../winconn/WinconnWindow.py:335
 msgid "Remmina import finnished"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:300
+#: ../winconn/WinconnWindow.py:338
+msgid "Select RDP file to import"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:343
+msgid "Windows Remote Desktop files"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:362
+msgid "RDP import succeessful"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:364
+msgid "RDP import unsuccessful"
+msgstr ""
+
+#: ../winconn/WinconnWindow.py:387
 msgid "Please check your application configuration"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:307
+#: ../winconn/WinconnWindow.py:395
 msgid "New application added successfully"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:316
+#: ../winconn/WinconnWindow.py:404
 msgid "Application updated successfully"
 msgstr ""
 
@@ -204,7 +226,7 @@ msgid "_Tools"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:7
-msgid "Create desktop shortcut"
+msgid "Create desktop launcher"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:8
@@ -232,115 +254,115 @@ msgid "Delete"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:14
-msgid "Create shortcut"
-msgstr ""
-
-#: ../data/ui/WinconnWindow.ui.h:15
 msgid "Quit"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:16
+#: ../data/ui/WinconnWindow.ui.h:15
 msgid "Name"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:17
+#: ../data/ui/WinconnWindow.ui.h:16
 msgid "App"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:18
+#: ../data/ui/WinconnWindow.ui.h:17
 msgid "Server"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:19
+#: ../data/ui/WinconnWindow.ui.h:18
 msgid "Please select remote application or create new"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:20
+#: ../data/ui/WinconnWindow.ui.h:19
 msgid "Application name"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:21
+#: ../data/ui/WinconnWindow.ui.h:20
 msgid "Name must be unique"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:22
+#: ../data/ui/WinconnWindow.ui.h:21
 msgid "Application"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:23
+#: ../data/ui/WinconnWindow.ui.h:22
 msgid "Application to execute. Avoid using \":\""
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:24
-msgid "Application can't be empty. Also you cant use : character in it"
+#: ../data/ui/WinconnWindow.ui.h:23
+msgid "Application can't be empty. Also you can't use : character in it"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:25
+#: ../data/ui/WinconnWindow.ui.h:24
 msgid "Terminal server address"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:26
+#: ../data/ui/WinconnWindow.ui.h:25
 msgid "Server can't be empty"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:27
+#: ../data/ui/WinconnWindow.ui.h:26
 msgid "Password"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:28
+#: ../data/ui/WinconnWindow.ui.h:27
 msgid "Domain"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:29
+#: ../data/ui/WinconnWindow.ui.h:28
 msgid "Port"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:30
+#: ../data/ui/WinconnWindow.ui.h:29
 msgid "Username"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:31
+#: ../data/ui/WinconnWindow.ui.h:30
 msgid "Username cant't be empty"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:32
+#: ../data/ui/WinconnWindow.ui.h:31
 msgid "3389"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:33
+#: ../data/ui/WinconnWindow.ui.h:32
 msgid "Port have to be in 1-65535 range"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:34
+#: ../data/ui/WinconnWindow.ui.h:33
 msgid "Disable compression"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:35
+#: ../data/ui/WinconnWindow.ui.h:34
 msgid "Disable clipboard"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:36
+#: ../data/ui/WinconnWindow.ui.h:35
 msgid "Disable sound"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:37
+#: ../data/ui/WinconnWindow.ui.h:36
 msgid "Folder to share"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:38
+#: ../data/ui/WinconnWindow.ui.h:37
 msgid "Folder not accessible"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:39
+#: ../data/ui/WinconnWindow.ui.h:38
 msgid "Disable RemoteFX"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:40
+#: ../data/ui/WinconnWindow.ui.h:39
 msgid "Cancel"
 msgstr ""
 
-#: ../data/ui/WinconnWindow.ui.h:41
+#: ../data/ui/WinconnWindow.ui.h:40
 msgid "Save"
+msgstr ""
+
+#: ../data/ui/WinconnWindow.ui.h:41
+msgid "Disable printer"
 msgstr ""
 
 #: ../winconn/__init__.py:55
@@ -355,23 +377,27 @@ msgstr ""
 msgid "Execute saved application by name"
 msgstr ""
 
-#: ../winconn_lib/Commons.py:177
+#: ../winconn/Commons.py:250
 msgid "Enter password for application: "
 msgstr ""
 
 #: ../data/ui/AboutWinconnDialog.ui.h:1
-msgid "Copyright (C) 2012 Alex Stanev <alex@stanev.org>"
-msgstr ""
-
-#: ../data/ui/AboutWinconnDialog.ui.h:2
 msgid "About WinConn"
 msgstr ""
 
+#: ../data/ui/AboutWinconnDialog.ui.h:2
+msgid "Copyright (C) 2012 Alex Stanev <alex@stanev.org>"
+msgstr ""
+
 #: ../data/ui/AboutWinconnDialog.ui.h:3
-msgid "WinConn site"
+msgid "WinConn development is kindly supported by Synapse Ideas"
 msgstr ""
 
 #: ../data/ui/AboutWinconnDialog.ui.h:4
+msgid "WinConn site"
+msgstr ""
+
+#: ../data/ui/AboutWinconnDialog.ui.h:5
 msgid ""
 "# Copyright (C) 2012 Alex Stanev <alex@stanev.org>\n"
 "# This program is free software: you can redistribute it and/or modify it \n"
@@ -386,6 +412,11 @@ msgid ""
 "# \n"
 "# You should have received a copy of the GNU General Public License along \n"
 "# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+
+#. New application
+#: ../winconn/indicator.py:40
+msgid "Show WinConn"
 msgstr ""
 
 #: ../winconn.desktop.in.h:2

@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: winconn
+Version: 0.2.9
+Summary: WinConn RemoteApp connection manager
+Home-page: https://launchpad.net/winconn
+Author: Alex Stanev
+Author-email: alex@stanev.org
+License: GPL-3
+Description: WinConn uses FreeRDP to provide users with seamless integration of remote windows applications on Ubuntu Desktop.
+Platform: UNKNOWN
+Requires: apport
+Requires: dbus
+Requires: gi.repository.AppIndicator3
+Requires: gi.repository.GLib
+Requires: gi.repository.GObject
+Requires: gi.repository.Gio
+Requires: gi.repository.Gtk
+Requires: gi.repository.LaunchpadIntegration
+Requires: gobject
+Requires: quickly
+Provides: winconn
+Provides: winconn_lib
