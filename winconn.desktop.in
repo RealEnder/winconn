@@ -6,7 +6,8 @@ Exec=winconn
 Icon=/usr/share/winconn/media/winconn.png
 Terminal=false
 Type=Application
+Actions=New
 
 [Desktop Action New]
-Name=Add new remote app
+_Name=Add new remote app
 Exec=/opt/extras.ubuntu.com/winconn/bin/winconn -n

@@ -7,7 +7,7 @@ else
 endif
 
 override_dh_auto_install:
-	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/winconn/bin                 --install-data=/opt/extras.ubuntu.com/winconn                 --install-lib=/opt/extras.ubuntu.com/winconn
+	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/winconn                 --install-data=/opt/extras.ubuntu.com/winconn                 --install-lib=/opt/extras.ubuntu.com/winconn
 
 override_dh_python2:
 	dh_python2 /opt/extras.ubuntu.com/winconn
@@ -21,7 +21,7 @@ override_dh_install:
 		mkdir -p debian/winconn/usr/share/applications; \
 		mv debian/winconn/opt/extras.ubuntu.com/winconn/share/applications/winconn.desktop debian/winconn/usr/share/applications/extras-winconn.desktop; \
 		rmdir --ignore-fail-on-non-empty debian/winconn/opt/extras.ubuntu.com/winconn/share/applications; \
-		sed -i 's|Exec=.*|Exec=/opt/extras.ubuntu.com/winconn/bin/winconn|' debian/winconn/usr/share/applications/extras-winconn.desktop; \
+		sed -i 's|Exec=[^ ]*|Exec=/opt/extras.ubuntu.com/winconn/bin/winconn|' debian/winconn/usr/share/applications/extras-winconn.desktop; \
 		sed -i 's|Icon=/usr/|Icon=/opt/extras.ubuntu.com/winconn/|' debian/winconn/usr/share/applications/extras-winconn.desktop; \
 	fi
 	grep -RlZ 'import gettext' debian/winconn/* | xargs -0 -r sed -i 's|\(import\) gettext$$|\1 locale|'
