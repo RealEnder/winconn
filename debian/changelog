@@ -1,3 +1,10 @@
+winconn (0.2.12) precise; urgency=low
+
+  * Use xdg-utils for launcher management
+  * Fix desktop action
+
+ -- Alex Stanev <alex@stanev.org>  Sun, 08 Jul 2012 22:00:58 +0300
+
 winconn (0.2.11ubuntu1) precise; urgency=low
 
   * 
