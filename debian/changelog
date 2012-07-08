@@ -1,3 +1,9 @@
+winconn (0.2.11ubuntu1) precise; urgency=low
+
+  * 
+
+ -- Alex Stanev <alex@stanev.org>  Sun, 08 Jul 2012 21:57:48 +0300
+
 winconn (0.2.11) precise; urgency=low
 
   * New release.

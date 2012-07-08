@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 16:50+0300\n"
+"POT-Creation-Date: 2012-07-08 21:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,19 +145,19 @@ msgstr ""
 msgid "Could not execute remote application."
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:239
+#: ../winconn/WinconnWindow.py:237
 msgid "No application for execution selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:243
+#: ../winconn/WinconnWindow.py:241
 msgid "Selected application has configuration errors"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:261
+#: ../winconn/WinconnWindow.py:259
 msgid "No application selected for deletion"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:264
+#: ../winconn/WinconnWindow.py:263
 msgid "Are you sure you want to delete {0} ?"
 msgstr ""
 
@@ -165,39 +165,35 @@ msgstr ""
 msgid "No application selected to create desktop launcher"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:288
-msgid "Could not create desktop launcher"
-msgstr ""
-
-#: ../winconn/WinconnWindow.py:335
+#: ../winconn/WinconnWindow.py:344
 msgid "Remmina import finnished"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:338
+#: ../winconn/WinconnWindow.py:347
 msgid "Select RDP file to import"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:343
+#: ../winconn/WinconnWindow.py:352
 msgid "Windows Remote Desktop files"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:362
+#: ../winconn/WinconnWindow.py:371
 msgid "RDP import succeessful"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:364
+#: ../winconn/WinconnWindow.py:373
 msgid "RDP import unsuccessful"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:387
+#: ../winconn/WinconnWindow.py:396
 msgid "Please check your application configuration"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:395
+#: ../winconn/WinconnWindow.py:404
 msgid "New application added successfully"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:404
+#: ../winconn/WinconnWindow.py:413
 msgid "Application updated successfully"
 msgstr ""
 
@@ -421,4 +417,8 @@ msgstr ""
 
 #: ../winconn.desktop.in.h:2
 msgid "WinConn RemoteApp manager"
+msgstr ""
+
+#: ../winconn.desktop.in.h:3
+msgid "Add new remote app"
 msgstr ""
