@@ -1,3 +1,10 @@
+winconn (0.2.7) precise; urgency=low
+
+  * Create desktop menus for applications
+  * Fix desktop action
+
+ -- Alex Stanev <alex@stanev.org>  Sun, 08 Jul 2012 15:31:34 +0300
+
 winconn (0.2.6) precise; urgency=low
 
   * Add appindicator support
