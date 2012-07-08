@@ -1,6 +1,0 @@
-#! /bin/sh
-set -e
-if [ "$1" = rtupdate ]; then
-	pyclean -p winconn /opt/extras.ubuntu.com/winconn
-	pycompile -p winconn -V 2.7 /opt/extras.ubuntu.com/winconn
-fi

@@ -1,2 +1,0 @@
-python:Depends=python, python (>= 2.7.1-0ubuntu2), python2.7
-misc:Depends=
