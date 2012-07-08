@@ -87,7 +87,7 @@ class InstallAndUpdateDataDirectory(DistUtilsExtra.auto.install_auto):
 
 DistUtilsExtra.auto.setup(
     name='winconn',
-    version='0.2.8',
+    version='0.2.9',
     license='GPL-3',
     author='Alex Stanev',
     author_email='alex@stanev.org',
