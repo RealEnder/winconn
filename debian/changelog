@@ -1,3 +1,9 @@
+winconn (0.2.8) precise; urgency=low
+
+  * New release.
+
+ -- Alex Stanev <alex@stanev.org>  Sun, 08 Jul 2012 15:37:32 +0300
+
 winconn (0.2.7) precise; urgency=low
 
   * Create desktop menus for applications
