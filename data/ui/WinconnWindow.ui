@@ -423,7 +423,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-about</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application name</property>
-                        <property name="secondary_icon_tooltip_text" translatable="yes">Name must be unique</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Name must be unique and consists of letters and numbers</property>
                         <property name="placeholder_text">My remote win cmd</property>
                       </object>
                       <packing>
@@ -471,7 +471,7 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_stock">gtk-file</property>
                         <property name="primary_icon_tooltip_text" translatable="yes">Application to execute. Avoid using ":"</property>
-                        <property name="secondary_icon_tooltip_text" translatable="yes">Application can't be empty. Also you can't use : character in it</property>
+                        <property name="secondary_icon_tooltip_text" translatable="yes">Application can't be empty. Refer to Help about more info on this field</property>
                         <property name="placeholder_text">cmd</property>
                       </object>
                       <packing>

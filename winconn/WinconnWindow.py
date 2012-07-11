@@ -29,7 +29,6 @@ from winconn_lib import Window
 from winconn_lib.helpers import get_media_file
 from winconn.AboutWinconnDialog import AboutWinconnDialog
 from winconn import Commons
-#from winconn import indicator
 
 from collections import OrderedDict
 from time import sleep
@@ -40,6 +39,8 @@ import os.path
 import sys
 import threading
 import gobject
+import string
+from sets import Set
 from subprocess import Popen
 from subprocess import PIPE
 from subprocess import call
@@ -143,6 +144,12 @@ class WinconnWindow(Window):
         valid = True
         # Name
         if self.common.get_App_opt('name') == '':
+            self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
+            valid = False
+        
+        # Name valid chars
+        ac = Set(string.ascii_letters+string.digits+'_- ')
+        if not Set(self.common.get_App_opt('name')).issubset(ac):
             self.ui.eName.set_property(self.sis, Gtk.STOCK_DIALOG_WARNING)
             valid = False
         
