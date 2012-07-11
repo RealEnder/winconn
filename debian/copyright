@@ -1,14 +1,10 @@
-Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
-Name: winconn
-Maintainer: Alex Stanev <alex@stanev.org>
+Format-Specification: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: winconn
+Upstream-Contact: Alex Stanev <alex@stanev.org>
 Source: https://launchpad.net/winconn
 
 Files: *
 Copyright: (C) 2012 Alex Stanev <alex@stanev.org>
-Copyright: (C) 2012 Alex Stanev <alex@stanev.org>"
-Copyright: (C) 2012 Alex Stanev <alex@stanev.org>\n"
-Copyright: (C) 2012 Alex Stanev &lt;alex@stanev.org&gt;
-Copyright: (C) 2012 Alex Stanev &lt;alex@stanev.org&gt;</property>
 Copyright: (C) 2012 Rosetta Contributors and Canonical Ltd 2012
 License: GPL-3
  The full text of the GPL is distributed in
