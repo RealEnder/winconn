@@ -46,7 +46,7 @@ from subprocess import PIPE
 from subprocess import call
 from shutil import rmtree
 
-from quickly import prompts
+from winconn import prompts
             
 # See winconn_lib.Window.py for more details about how this class works
 class WinconnWindow(Window):

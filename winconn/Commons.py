@@ -24,7 +24,7 @@ from fnmatch import fnmatch
 from time import time
 import ConfigParser
 from collections import OrderedDict
-from quickly import prompts
+from winconn import prompts
 
 import logging
 logger = logging.getLogger('winconn')
