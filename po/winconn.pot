@@ -1,14 +1,14 @@
-# WinConn translation strings
-# Copyright (C) 2012 Alex Stanev <alex@stanev.org>
-# This file is distributed under the same license as the winconn package.
-# Alex Stanev <alex@stanev.org>, 2012.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 21:57+0300\n"
+"POT-Creation-Date: 2012-11-23 12:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,183 +17,183 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../winconn/WinconnWindow.py:57
+#: ../winconn/WinconnWindow.py:58
 msgid "xfreerdp died unexpectedly"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:58
+#: ../winconn/WinconnWindow.py:59
 msgid "Success"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:59
+#: ../winconn/WinconnWindow.py:60
 msgid "Disconnect"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:60
+#: ../winconn/WinconnWindow.py:61
 msgid "Logoff"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:61
+#: ../winconn/WinconnWindow.py:62
 msgid "Idle timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:62
+#: ../winconn/WinconnWindow.py:63
 msgid "Logon timeout"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:63
+#: ../winconn/WinconnWindow.py:64
 msgid "Connection replaced"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:64
+#: ../winconn/WinconnWindow.py:65
 msgid "Out of memory"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:65
+#: ../winconn/WinconnWindow.py:66
 msgid "Connection denied"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:66
+#: ../winconn/WinconnWindow.py:67
 msgid "Connection denied FIPS"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:67
+#: ../winconn/WinconnWindow.py:68
 msgid "Remote user does not have required privileges"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:68
+#: ../winconn/WinconnWindow.py:69
 msgid "Fresh credientials required"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:69
+#: ../winconn/WinconnWindow.py:70
 msgid "Disconnected by user"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:70
+#: ../winconn/WinconnWindow.py:71
 msgid "Internal"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:71
+#: ../winconn/WinconnWindow.py:72
 msgid "No license server"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:72
+#: ../winconn/WinconnWindow.py:73
 msgid "No license"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:73
+#: ../winconn/WinconnWindow.py:74
 msgid "Bad message from client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:74
+#: ../winconn/WinconnWindow.py:75
 msgid "HWID does not match"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:75
+#: ../winconn/WinconnWindow.py:76
 msgid "Bad client"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:76
+#: ../winconn/WinconnWindow.py:77
 msgid "Can not finish protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:77
+#: ../winconn/WinconnWindow.py:78
 msgid "Client ended protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:78
+#: ../winconn/WinconnWindow.py:79
 msgid "Bad client encryption"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:79
+#: ../winconn/WinconnWindow.py:80
 msgid "Can not upgrade protocol"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:80
+#: ../winconn/WinconnWindow.py:81
 msgid "No remote connections allowed"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:81
+#: ../winconn/WinconnWindow.py:82
 msgid "RDP protocol error"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:82
+#: ../winconn/WinconnWindow.py:83
 msgid "Bad xfreerdp options. Consider filling a bug on Launchpad"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:83
+#: ../winconn/WinconnWindow.py:84
 msgid "xfreerdp out of memory"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:84
+#: ../winconn/WinconnWindow.py:85
 msgid "xfreerdp protocol error"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:85
+#: ../winconn/WinconnWindow.py:86
 msgid "Connection to server failed"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:104
+#: ../winconn/WinconnWindow.py:105
 msgid "Unknown return code {0}"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:107
+#: ../winconn/WinconnWindow.py:108
 msgid "Application not in RemoteApp list. Check help to fix this."
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:109
+#: ../winconn/WinconnWindow.py:110
 msgid "Could not execute remote application."
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:237
+#: ../winconn/WinconnWindow.py:244
 msgid "No application for execution selected"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:241
+#: ../winconn/WinconnWindow.py:248
 msgid "Selected application has configuration errors"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:259
+#: ../winconn/WinconnWindow.py:266
 msgid "No application selected for deletion"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:263
+#: ../winconn/WinconnWindow.py:270
 msgid "Are you sure you want to delete {0} ?"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:273
+#: ../winconn/WinconnWindow.py:280
 msgid "No application selected to create desktop launcher"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:344
+#: ../winconn/WinconnWindow.py:351
 msgid "Remmina import finnished"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:347
+#: ../winconn/WinconnWindow.py:354
 msgid "Select RDP file to import"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:352
+#: ../winconn/WinconnWindow.py:359
 msgid "Windows Remote Desktop files"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:371
+#: ../winconn/WinconnWindow.py:378
 msgid "RDP import succeessful"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:373
+#: ../winconn/WinconnWindow.py:380
 msgid "RDP import unsuccessful"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:396
+#: ../winconn/WinconnWindow.py:403
 msgid "Please check your application configuration"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:404
+#: ../winconn/WinconnWindow.py:411
 msgid "New application added successfully"
 msgstr ""
 
-#: ../winconn/WinconnWindow.py:413
+#: ../winconn/WinconnWindow.py:420
 msgid "Application updated successfully"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgid "Application name"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:20
-msgid "Name must be unique"
+msgid "Name must be unique and consists of letters and numbers"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:21
@@ -286,7 +286,7 @@ msgid "Application to execute. Avoid using \":\""
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:23
-msgid "Application can't be empty. Also you can't use : character in it"
+msgid "Application can't be empty. Refer to Help about more info on this field"
 msgstr ""
 
 #: ../data/ui/WinconnWindow.ui.h:24
@@ -361,6 +361,11 @@ msgstr ""
 msgid "Disable printer"
 msgstr ""
 
+#. New application
+#: ../winconn/indicator.py:40
+msgid "Show WinConn"
+msgstr ""
+
 #: ../winconn/__init__.py:55
 msgid "Show debug messages (-vv debugs winconn_lib also)"
 msgstr ""
@@ -410,9 +415,68 @@ msgid ""
 "# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
 
-#. New application
-#: ../winconn/indicator.py:40
-msgid "Show WinConn"
+#: ../winconn/prompts.py:109 ../winconn/prompts.py:153
+msgid "Input String"
+msgstr ""
+
+#: ../winconn/prompts.py:109 ../winconn/prompts.py:153
+msgid "Input a String:"
+msgstr ""
+
+#: ../winconn/prompts.py:176 ../winconn/prompts.py:224
+msgid "Choose Date"
+msgstr ""
+
+#: ../winconn/prompts.py:176 ../winconn/prompts.py:224
+msgid "Choose a Date:"
+msgstr ""
+
+#: ../winconn/prompts.py:251 ../winconn/prompts.py:310
+#: ../winconn/prompts.py:392
+msgid "Enter Number"
+msgstr ""
+
+#: ../winconn/prompts.py:251 ../winconn/prompts.py:310
+#: ../winconn/prompts.py:392
+msgid "Enter an Integer Value:"
+msgstr ""
+
+#: ../winconn/prompts.py:329 ../winconn/prompts.py:440
+#: ../winconn/prompts.py:501
+msgid "Enter Price"
+msgstr ""
+
+#: ../winconn/prompts.py:329 ../winconn/prompts.py:440
+#: ../winconn/prompts.py:501
+msgid "Choose a Price:"
+msgstr ""
+
+#: ../winconn/prompts.py:532
+msgid "Choose Yes or No"
+msgstr ""
+
+#: ../winconn/prompts.py:583
+msgid "Choose an option"
+msgstr ""
+
+#: ../winconn/prompts.py:630
+msgid "Warning"
+msgstr ""
+
+#: ../winconn/prompts.py:649
+msgid "Error"
+msgstr ""
+
+#: ../winconn/prompts.py:669
+msgid "Information"
+msgstr ""
+
+#: ../winconn/prompts.py:733 ../winconn/prompts.py:878
+msgid "Choose an Image"
+msgstr ""
+
+#: ../winconn/prompts.py:901
+msgid "Choose a Directory"
 msgstr ""
 
 #: ../winconn.desktop.in.h:2

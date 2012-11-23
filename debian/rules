@@ -6,33 +6,4 @@ else
 	dh $@ --with python2
 endif
 
-override_dh_auto_install:
-	dh_auto_install -- --install-scripts=/opt/extras.ubuntu.com/winconn                 --install-data=/opt/extras.ubuntu.com/winconn                 --install-lib=/opt/extras.ubuntu.com/winconn
-
-override_dh_python2:
-	dh_python2 /opt/extras.ubuntu.com/winconn
-
-
-override_dh_install:
-	dh_install
-	mkdir -p debian/winconn/opt/extras.ubuntu.com/winconn/bin
-	if [ -x debian/winconn/opt/extras.ubuntu.com/winconn/winconn/winconn ]; then mv debian/winconn/opt/extras.ubuntu.com/winconn/winconn/winconn debian/winconn/opt/extras.ubuntu.com/winconn/bin; fi
-	if [ -f debian/winconn/opt/extras.ubuntu.com/winconn/share/applications/winconn.desktop ]; then \
-		mkdir -p debian/winconn/usr/share/applications; \
-		mv debian/winconn/opt/extras.ubuntu.com/winconn/share/applications/winconn.desktop debian/winconn/usr/share/applications/extras-winconn.desktop; \
-		rmdir --ignore-fail-on-non-empty debian/winconn/opt/extras.ubuntu.com/winconn/share/applications; \
-		sed -i 's|Exec=[^ ]*|Exec=/opt/extras.ubuntu.com/winconn/bin/winconn|' debian/winconn/usr/share/applications/extras-winconn.desktop; \
-		sed -i 's|Icon=/usr/|Icon=/opt/extras.ubuntu.com/winconn/|' debian/winconn/usr/share/applications/extras-winconn.desktop; \
-	fi
-	grep -RlZ 'import gettext' debian/winconn/* | xargs -0 -r sed -i 's|\(import\) gettext$$|\1 locale|'
-	grep -RlZ 'from gettext import gettext as _' debian/winconn/* | xargs -0 -r sed -i 's|from gettext \(import gettext as _\)|from locale \1|'
-	grep -RlZ "gettext.textdomain('winconn')" debian/winconn/* | xargs -0 -r sed -i "s|gettext\(\.textdomain('winconn')\)|locale\.bindtextdomain('winconn', '/opt/extras.ubuntu.com/winconn/share/locale')\nlocale\1|" 
-	sed -i "s|__winconn_data_directory__ =.*|__winconn_data_directory__ = '/opt/extras.ubuntu.com/winconn/share/winconn/'|" debian/winconn/opt/extras.ubuntu.com/winconn/winconn*/winconnconfig.py
-	sed -i 's|        sys.path.insert(0, opt_path)|\0\n    os.putenv("XDG_DATA_DIRS", "%s:%s" % ("/opt/extras.ubuntu.com/winconn/share/", os.getenv("XDG_DATA_DIRS", "")))|' debian/winconn/opt/extras.ubuntu.com/winconn/bin/winconn
-	if [ -d debian/winconn/opt/extras.ubuntu.com/winconn/share/glib-2.0/schemas ]; then glib-compile-schemas debian/winconn/opt/extras.ubuntu.com/winconn/share/glib-2.0/schemas; fi
-	if [ -f debian/winconn/etc/apport/crashdb.conf.d/winconn-crashdb.conf ]; then \
-		mkdir -p debian/winconn/opt/extras.ubuntu.com/winconn/etc/apport/crashdb.conf.d; \
-		mv debian/winconn/etc/apport/crashdb.conf.d/winconn-crashdb.conf debian/winconn/opt/extras.ubuntu.com/winconn/etc/apport/crashdb.conf.d; \
-		rm -rf debian/winconn/etc; \
-	fi
 
