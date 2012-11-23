@@ -1,5 +1,5 @@
 project = winconn
-version = 0.2.14
+version = 12.08.1
 template = ubuntu-application
 bzrbranch = lp:winconn
 dependencies = libfreerdp1, libfreerdp-plugins-standard, freerdp-x11, xdg-utils

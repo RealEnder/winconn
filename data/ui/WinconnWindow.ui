@@ -52,7 +52,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="miConnection">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Connection</property>
@@ -63,7 +62,6 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkMenuItem" id="miNew">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_New</property>
@@ -74,7 +72,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="miExec">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Execute</property>
@@ -85,7 +82,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="miRemove">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Remove</property>
@@ -103,12 +99,12 @@
                     <child>
                       <object class="GtkImageMenuItem" id="imiClose">
                         <property name="label">gtk-close</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <signal name="activate" handler="on_mnu_close_activate" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -117,7 +113,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="miTools">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Tools</property>
@@ -128,7 +123,6 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkMenuItem" id="miDesktop">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Create desktop launcher</property>
@@ -138,7 +132,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="miImportRemmina">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Import from Remmina</property>
@@ -148,7 +141,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="miImportRDP">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Import from RDP file</property>
@@ -162,7 +154,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="miHelp">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Help</property>
@@ -174,22 +165,22 @@
                     <child>
                       <object class="GtkImageMenuItem" id="imiContents">
                         <property name="label">gtk-help</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="F1" signal="activate"/>
+                        <signal name="activate" handler="on_mnu_contents_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="imiAbout">
                         <property name="label">gtk-about</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_mnu_about_activate" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -209,11 +200,9 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToolButton" id="tbExec">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Execute</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Execute</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-execute</property>
@@ -226,11 +215,9 @@
             </child>
             <child>
               <object class="GtkToolButton" id="tbNew">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">New</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">New</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-add</property>
@@ -243,11 +230,9 @@
             </child>
             <child>
               <object class="GtkToolButton" id="tbDel">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Delete</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Delete</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-delete</property>
@@ -260,10 +245,8 @@
             </child>
             <child>
               <object class="GtkSeparatorToolItem" id="tbSep1">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -272,11 +255,9 @@
             </child>
             <child>
               <object class="GtkToolButton" id="tbShortcut">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Create desktop launcher</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Create desktop launcher</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">user-desktop</property>
@@ -289,10 +270,8 @@
             </child>
             <child>
               <object class="GtkSeparatorToolItem" id="tbSep2">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -301,11 +280,9 @@
             </child>
             <child>
               <object class="GtkToolButton" id="tbQuit">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">Quit</property>
-                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">Quit</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-quit</property>
@@ -735,13 +712,11 @@
                     <child>
                       <object class="GtkButton" id="bCancel">
                         <property name="label" translatable="yes">Cancel</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="width_request">100</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
-                        <property name="use_action_appearance">False</property>
                         <signal name="clicked" handler="bCancel_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -754,13 +729,11 @@
                     <child>
                       <object class="GtkButton" id="bSave">
                         <property name="label" translatable="yes">Save</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="width_request">100</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
-                        <property name="use_action_appearance">False</property>
                         <signal name="clicked" handler="bSave_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -772,11 +745,9 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sComp">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -787,11 +758,9 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sClip">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -802,11 +771,9 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sSound">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -817,11 +784,9 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sRFX">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -847,11 +812,9 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sPrinter">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
-                        <property name="use_action_appearance">False</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
