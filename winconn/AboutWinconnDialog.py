@@ -17,9 +17,9 @@ You should have received a copy of the GNU General Public License
 along with WinConn.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('winconn')
+import locale
+from locale import gettext as _
+locale.textdomain('winconn')
 
 import logging
 logger = logging.getLogger('winconn')

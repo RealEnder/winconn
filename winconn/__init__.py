@@ -16,9 +16,9 @@
 
 import argparse
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('winconn')
+import locale
+from locale import gettext as _
+locale.textdomain('winconn')
 
 from gi.repository import Gtk, GObject # pylint: disable=E0611
 import dbus, dbus.service, dbus.glib

@@ -16,8 +16,8 @@
 
 from gi.repository import Gtk # pylint: disable=E0611
 
-import gettext
-from gettext import gettext as _
+import locale
+from locale import gettext as _
 
 import os
 from fnmatch import fnmatch

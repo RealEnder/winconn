@@ -21,9 +21,9 @@ from gi.repository import Gtk, AppIndicator3 # pylint: disable=E0611
 
 from winconn_lib.helpers import get_media_file
 
-import gettext
-from gettext import gettext as _
-gettext.textdomain('winconn')
+import locale
+from locale import gettext as _
+locale.textdomain('winconn')
 
 class Indicator:
     def __init__(self, window):
