@@ -1,4 +1,4 @@
-# Bulgarian translation for winconn
+# Spanish translation for winconn
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the winconn package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,198 +8,199 @@ msgstr ""
 "Project-Id-Version: winconn\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-07-08 21:57+0300\n"
-"PO-Revision-Date: 2012-07-10 10:17+0000\n"
-"Last-Translator: Alex Stanev <alex@stanev.org>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2012-07-16 07:38+0000\n"
+"Last-Translator: niony <niony@yahoo.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-12 05:10+0000\n"
-"X-Generator: Launchpad (build 15593)\n"
+"X-Launchpad-Export-Date: 2012-07-17 05:18+0000\n"
+"X-Generator: Launchpad (build 15627)\n"
 
 #: ../winconn/WinconnWindow.py:57
 msgid "xfreerdp died unexpectedly"
-msgstr "грешка при изпълнението на xfreerdp"
+msgstr "error al ejecutar xfreerdp"
 
 #: ../winconn/WinconnWindow.py:58
 msgid "Success"
-msgstr "Успешна операция"
+msgstr "Éxito"
 
 #: ../winconn/WinconnWindow.py:59
 msgid "Disconnect"
-msgstr "Прекъсната връзка"
+msgstr "Desconectar"
 
 #: ../winconn/WinconnWindow.py:60
 msgid "Logoff"
-msgstr "Изход"
+msgstr "Fin de sesión"
 
 #: ../winconn/WinconnWindow.py:61
 msgid "Idle timeout"
-msgstr "Прекъсване поради бездействие"
+msgstr "Sesión desconectada por inactividad"
 
 #: ../winconn/WinconnWindow.py:62
 msgid "Logon timeout"
-msgstr "Прекъсване поради липса на вход"
+msgstr "Sesión desconectada por falta de inicio de sesión"
 
 #: ../winconn/WinconnWindow.py:63
 msgid "Connection replaced"
-msgstr "Връзката е заместена"
+msgstr "Conexión reemplazada"
 
 #: ../winconn/WinconnWindow.py:64
 msgid "Out of memory"
-msgstr "Недостатъчна памет"
+msgstr "Memoria agotada"
 
 #: ../winconn/WinconnWindow.py:65
 msgid "Connection denied"
-msgstr "Връзката отказана"
+msgstr "Conexión denegada"
 
 #: ../winconn/WinconnWindow.py:66
 msgid "Connection denied FIPS"
-msgstr "Връзката отказана (FIPS)"
+msgstr "Conexión denegada (FIPS)"
 
 #: ../winconn/WinconnWindow.py:67
 msgid "Remote user does not have required privileges"
-msgstr "Отдалеченият потребител няма необходимите прилегии"
+msgstr "El usuario remoto no tiene los privilegios requeridos"
 
 #: ../winconn/WinconnWindow.py:68
 msgid "Fresh credientials required"
-msgstr "Необходимо е да се оторизирате отново"
+msgstr "Es necesario autorizar de nuevo"
 
 #: ../winconn/WinconnWindow.py:69
 msgid "Disconnected by user"
-msgstr "Връзката прекратена от потребителя"
+msgstr "Desconectada por el usuario"
 
 #: ../winconn/WinconnWindow.py:70
 msgid "Internal"
-msgstr "Вътрешна"
+msgstr "Interno"
 
 #: ../winconn/WinconnWindow.py:71
 msgid "No license server"
-msgstr "Липсва лицензен сървър"
+msgstr "Еl servidor no tiene licencia válida"
 
 #: ../winconn/WinconnWindow.py:72
 msgid "No license"
-msgstr "Липсва лиценз"
+msgstr "Sin licencia"
 
 #: ../winconn/WinconnWindow.py:73
 msgid "Bad message from client"
-msgstr "Некоректно съобщение от клиента"
+msgstr "Mensaje incorrecto del cliente"
 
 #: ../winconn/WinconnWindow.py:74
 msgid "HWID does not match"
-msgstr "HWID не съответства"
+msgstr "El HWID no coincide"
 
 #: ../winconn/WinconnWindow.py:75
 msgid "Bad client"
-msgstr "Неравилна версия на клиента"
+msgstr "Versión incorrecta del cliente"
 
 #: ../winconn/WinconnWindow.py:76
 msgid "Can not finish protocol"
-msgstr "Грешка в протокола"
+msgstr "Error del protocolo"
 
 #: ../winconn/WinconnWindow.py:77
 msgid "Client ended protocol"
-msgstr "Клиентът затвори връзката"
+msgstr "Cliente ha terminado la conexión"
 
 #: ../winconn/WinconnWindow.py:78
 msgid "Bad client encryption"
-msgstr "Проблем при настройките за криптиране на връзката"
+msgstr "Problema de configuración de la conexión encriptada"
 
 #: ../winconn/WinconnWindow.py:79
 msgid "Can not upgrade protocol"
-msgstr "Невъзможно обновление на протокола"
+msgstr "No puede actualizar protocolo"
 
 #: ../winconn/WinconnWindow.py:80
 msgid "No remote connections allowed"
-msgstr "Не са позволени отдалечени връзки към сървъра"
+msgstr "No permite conexiones remotas"
 
 #: ../winconn/WinconnWindow.py:81
 msgid "RDP protocol error"
-msgstr "Грешка в RDP протокола"
+msgstr "Error de protocolo RDP"
 
 #: ../winconn/WinconnWindow.py:82
 msgid "Bad xfreerdp options. Consider filling a bug on Launchpad"
 msgstr ""
-"Проблем при изпълнението на xfreerdp. Моля подайте репорт за грешката в "
+"Error al ejecutar xfreerdp. Considere la posibilidad de llenar un bug en "
 "Launchpad"
 
 #: ../winconn/WinconnWindow.py:83
 msgid "xfreerdp out of memory"
-msgstr "Недостатъчна памет за xfreerdp"
+msgstr "xfreedp memoria agotada"
 
 #: ../winconn/WinconnWindow.py:84
 msgid "xfreerdp protocol error"
-msgstr "Грешка в протокола на xfreerdp"
+msgstr "Error de protocolo xfreerdp"
 
 #: ../winconn/WinconnWindow.py:85
 msgid "Connection to server failed"
-msgstr "Връзката към сървъра неуспешна"
+msgstr "No puede conectar con el servidor"
 
 #: ../winconn/WinconnWindow.py:104
 msgid "Unknown return code {0}"
-msgstr "Непознат код на грешка {0}"
+msgstr "Código de error desconocido {0}"
 
 #: ../winconn/WinconnWindow.py:107
 msgid "Application not in RemoteApp list. Check help to fix this."
 msgstr ""
-"Приложението не е в RemoteApp списъка. Моля прегледайте помощната информация "
-"за отстраняване."
+"La aplicación no está en la lista de RemoteApp. Consulta Ayuda para "
+"solucionar este problema."
 
 #: ../winconn/WinconnWindow.py:109
 msgid "Could not execute remote application."
-msgstr "Неуспешно стартиране на отдалеченото приложение"
+msgstr "No puede ejecutar aplicación remota"
 
 #: ../winconn/WinconnWindow.py:237
 msgid "No application for execution selected"
-msgstr "Не е избрано приложение за изпълнение"
+msgstr "No hay ninguna aplicación seleccionada para ejecutar"
 
 #: ../winconn/WinconnWindow.py:241
 msgid "Selected application has configuration errors"
-msgstr "Избраното приложение има грешки в конфигурацията"
+msgstr "La aplicación seleccionada tiene errores de configuración"
 
 #: ../winconn/WinconnWindow.py:259
 msgid "No application selected for deletion"
-msgstr "Не е избрано приложение за изтриване"
+msgstr "No hay ninguna aplicación seleccionada para eliminar"
 
 #: ../winconn/WinconnWindow.py:263
 msgid "Are you sure you want to delete {0} ?"
-msgstr "Сигурни ли сте, че искате да изтриете {0} ?"
+msgstr "¿Está seguro de que quiere eliminar {0}?"
 
 #: ../winconn/WinconnWindow.py:273
 msgid "No application selected to create desktop launcher"
-msgstr "Не е избрано приложение за създаване на икона на работния плот"
+msgstr ""
+"No hay ninguna aplicación seleccionada para crear lanzador de escritorio"
 
 #: ../winconn/WinconnWindow.py:344
 msgid "Remmina import finnished"
-msgstr "Зареждането от Remmina приключи"
+msgstr "La importación de Remmina ha terminado"
 
 #: ../winconn/WinconnWindow.py:347
 msgid "Select RDP file to import"
-msgstr "Изберете RDP файл за зареждане"
+msgstr "Seleccione el archivo RDP para importar"
 
 #: ../winconn/WinconnWindow.py:352
 msgid "Windows Remote Desktop files"
-msgstr "Windows RDP файлове"
+msgstr "Archivos de Windows RDP"
 
 #: ../winconn/WinconnWindow.py:371
 msgid "RDP import succeessful"
-msgstr "RDP файлът се зареди успешно"
+msgstr "RDP importado con éxito"
 
 #: ../winconn/WinconnWindow.py:373
 msgid "RDP import unsuccessful"
-msgstr "RDP зареждането неуспешно"
+msgstr "No puede importar RDP"
 
 #: ../winconn/WinconnWindow.py:396
 msgid "Please check your application configuration"
-msgstr "Моля прегледайте параметрите на приложението"
+msgstr "Por favor revise su configuración de la aplicación"
 
 #: ../winconn/WinconnWindow.py:404
 msgid "New application added successfully"
-msgstr "Новото приложение добавено успешно"
+msgstr "Nueva aplicación añadida con éxito"
 
 #: ../winconn/WinconnWindow.py:413
 msgid "Application updated successfully"
-msgstr "Приложението обновено успешно"
+msgstr "Aplicación actualizada con éxito"
 
 #: ../data/ui/WinconnWindow.ui.h:1 ../winconn.desktop.in.h:1
 msgid "WinConn"
@@ -207,119 +208,121 @@ msgstr "WinConn"
 
 #: ../data/ui/WinconnWindow.ui.h:2
 msgid "_Connection"
-msgstr "_Връзка"
+msgstr "_Conexión"
 
 #: ../data/ui/WinconnWindow.ui.h:3
 msgid "_New"
-msgstr "_Нов"
+msgstr "_Nuevo"
 
 #: ../data/ui/WinconnWindow.ui.h:4
 msgid "_Execute"
-msgstr "_Изпълняване"
+msgstr "_Ejecutar"
 
 #: ../data/ui/WinconnWindow.ui.h:5
 msgid "_Remove"
-msgstr "_Премахване"
+msgstr "_Eliminar"
 
 #: ../data/ui/WinconnWindow.ui.h:6
 msgid "_Tools"
-msgstr "_Инструменти"
+msgstr "_Herramientas"
 
 #: ../data/ui/WinconnWindow.ui.h:7
 msgid "Create desktop launcher"
-msgstr "Създай икона на работния плот"
+msgstr "Crear lanzador de escritorio"
 
 #: ../data/ui/WinconnWindow.ui.h:8
 msgid "Import from Remmina"
-msgstr "Зареждане от Remmina"
+msgstr "Importar desde Remmina"
 
 #: ../data/ui/WinconnWindow.ui.h:9
 msgid "Import from RDP file"
-msgstr "Зареждане на RDP файл"
+msgstr "Importar desde un archivo RDP"
 
 #: ../data/ui/WinconnWindow.ui.h:10
 msgid "_Help"
-msgstr "_Помощ"
+msgstr "_Ayuda"
 
 #: ../data/ui/WinconnWindow.ui.h:11
 msgid "Execute"
-msgstr "Изпълнение"
+msgstr "Ejecutar"
 
 #: ../data/ui/WinconnWindow.ui.h:12
 msgid "New"
-msgstr "Нова"
+msgstr "Nuevo"
 
 #: ../data/ui/WinconnWindow.ui.h:13
 msgid "Delete"
-msgstr "Изтриване"
+msgstr "Eliminar"
 
 #: ../data/ui/WinconnWindow.ui.h:14
 msgid "Quit"
-msgstr "Изход"
+msgstr "Salir"
 
 #: ../data/ui/WinconnWindow.ui.h:15
 msgid "Name"
-msgstr "Име"
+msgstr "Nombre"
 
 #: ../data/ui/WinconnWindow.ui.h:16
 msgid "App"
-msgstr "Приложение"
+msgstr "Aplicación"
 
 #: ../data/ui/WinconnWindow.ui.h:17
 msgid "Server"
-msgstr "Сървър"
+msgstr "Servidor"
 
 #: ../data/ui/WinconnWindow.ui.h:18
 msgid "Please select remote application or create new"
-msgstr "Моля изберете приложение или създайте ново"
+msgstr "Por favor, seleccione una aplicación o crea una nueva"
 
 #: ../data/ui/WinconnWindow.ui.h:19
 msgid "Application name"
-msgstr "Име на приложение"
+msgstr "Nombre de la aplicación"
 
 #: ../data/ui/WinconnWindow.ui.h:20
 msgid "Name must be unique"
-msgstr "Името трябва да е уникално"
+msgstr "El nombre debe ser único"
 
 #: ../data/ui/WinconnWindow.ui.h:21
 msgid "Application"
-msgstr "Приложение"
+msgstr "Aplicación"
 
 #: ../data/ui/WinconnWindow.ui.h:22
 msgid "Application to execute. Avoid using \":\""
-msgstr "Приложение за изпълнение"
+msgstr "Aplicación a ejecutar. Evite usar «:»"
 
 #: ../data/ui/WinconnWindow.ui.h:23
 msgid "Application can't be empty. Also you can't use : character in it"
-msgstr "Отдалеченото приложение не може да празно."
+msgstr ""
+"La aplicación no puede estar vacía. Además no puede usar el carácter : en "
+"ella"
 
 #: ../data/ui/WinconnWindow.ui.h:24
 msgid "Terminal server address"
-msgstr "Адрес на терминалния сървър"
+msgstr "Dirección del servidor terminal"
 
 #: ../data/ui/WinconnWindow.ui.h:25
 msgid "Server can't be empty"
-msgstr "Полето сървър не може да е празно"
+msgstr "El campo servidor no puede estar vacío"
 
 #: ../data/ui/WinconnWindow.ui.h:26
 msgid "Password"
-msgstr "Парола"
+msgstr "Contraseña"
 
 #: ../data/ui/WinconnWindow.ui.h:27
 msgid "Domain"
-msgstr "Домейн"
+msgstr "Dominio"
 
 #: ../data/ui/WinconnWindow.ui.h:28
 msgid "Port"
-msgstr "Порт"
+msgstr "Puerto"
 
 #: ../data/ui/WinconnWindow.ui.h:29
 msgid "Username"
-msgstr "Потребителско име"
+msgstr "Nombre de usuario"
 
 #: ../data/ui/WinconnWindow.ui.h:30
 msgid "Username cant't be empty"
-msgstr "Потребителното име не може да е празно"
+msgstr "El nombre de usuario no puede estar vacío"
 
 #: ../data/ui/WinconnWindow.ui.h:31
 msgid "3389"
@@ -327,63 +330,63 @@ msgstr "3389"
 
 #: ../data/ui/WinconnWindow.ui.h:32
 msgid "Port have to be in 1-65535 range"
-msgstr "Порт е число в интервала 1-65535"
+msgstr "El rango de números del puerto es de 1 a 65535"
 
 #: ../data/ui/WinconnWindow.ui.h:33
 msgid "Disable compression"
-msgstr "Изключи компресията"
+msgstr "Desactivar la compresión"
 
 #: ../data/ui/WinconnWindow.ui.h:34
 msgid "Disable clipboard"
-msgstr "Изключи клипборда"
+msgstr "Desactivar el portapapeles"
 
 #: ../data/ui/WinconnWindow.ui.h:35
 msgid "Disable sound"
-msgstr "Изключи звука"
+msgstr "Desactivar sonido"
 
 #: ../data/ui/WinconnWindow.ui.h:36
 msgid "Folder to share"
-msgstr "Папка за споделяне"
+msgstr "Carpeta a compartir"
 
 #: ../data/ui/WinconnWindow.ui.h:37
 msgid "Folder not accessible"
-msgstr "Папката не е достъпна"
+msgstr "Carpeta no accesible"
 
 #: ../data/ui/WinconnWindow.ui.h:38
 msgid "Disable RemoteFX"
-msgstr "Изключи RemoteFX"
+msgstr "Desactivar RemoteFX"
 
 #: ../data/ui/WinconnWindow.ui.h:39
 msgid "Cancel"
-msgstr "Отказ"
+msgstr "Cancelar"
 
 #: ../data/ui/WinconnWindow.ui.h:40
 msgid "Save"
-msgstr "Запази"
+msgstr "Guardar"
 
 #: ../data/ui/WinconnWindow.ui.h:41
 msgid "Disable printer"
-msgstr "Изключи принтера"
+msgstr "Desactivar la impresora"
 
 #: ../winconn/__init__.py:55
 msgid "Show debug messages (-vv debugs winconn_lib also)"
-msgstr "Показвай допълнителни съобщения (-vv включва и winconn_lib)"
+msgstr "Mostrar mensajes de depuración (-vv depura winconn_lib también)"
 
 #: ../winconn/__init__.py:58
 msgid "Create new application connection"
-msgstr "Създване на ново приложение"
+msgstr "Crear conexión de aplicación nueva"
 
 #: ../winconn/__init__.py:61
 msgid "Execute saved application by name"
-msgstr "Изпълнение на приложение по име"
+msgstr "Ejecutar aplicación por su nombre"
 
 #: ../winconn/Commons.py:250
 msgid "Enter password for application: "
-msgstr "Въведете парола за приложението: "
+msgstr "Introduzca la contraseña para la aplicación: "
 
 #: ../data/ui/AboutWinconnDialog.ui.h:1
 msgid "About WinConn"
-msgstr "Относно WinConn"
+msgstr "Acerca de WinConn"
 
 #: ../data/ui/AboutWinconnDialog.ui.h:2
 msgid "Copyright (C) 2012 Alex Stanev <alex@stanev.org>"
@@ -391,11 +394,11 @@ msgstr "Copyright (C) 2012 Alex Stanev <alex@stanev.org>"
 
 #: ../data/ui/AboutWinconnDialog.ui.h:3
 msgid "WinConn development is kindly supported by Synapse Ideas"
-msgstr "Разработката на WinConn е подкрепена от Synapse Ideas"
+msgstr "El desarrollo de WinConn es apoyado amablemente por Synapse Ideas"
 
 #: ../data/ui/AboutWinconnDialog.ui.h:4
 msgid "WinConn site"
-msgstr "Страница на WinConn"
+msgstr "Sitio de WinConn"
 
 #: ../data/ui/AboutWinconnDialog.ui.h:5
 msgid ""
@@ -414,28 +417,29 @@ msgid ""
 "# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
 "# Copyright (C) 2012 Alex Stanev <alex@stanev.org>\n"
-"# This program is free software: you can redistribute it and/or modify it \n"
-"# under the terms of the GNU General Public License version 3, as published "
-"\n"
-"# by the Free Software Foundation.\n"
+"# Este programa es software libre: puede redistribuirlo y/o modificarlo\n"
+"# bajo los términos de la Licencia Púbica General de GNU versión 3, como la\n"
+"# publica la Free Software Foundation.\n"
 "# \n"
-"# This program is distributed in the hope that it will be useful, but \n"
-"# WITHOUT ANY WARRANTY; without even the implied warranties of \n"
-"# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR \n"
-"# PURPOSE.  See the GNU General Public License for more details.\n"
+"# Este programa se distribuye con la esperanza de que será útil, pero\n"
+"# SIN NINGUNA GARANTÍA; sin siquiera las garantías implícitas de\n"
+"# COMERCIABILIDAD, CALIDAD SATISFACTORIA o IDONEIDAD PARA UN\n"
+"# PROPÓSITO PARTICULAR. Vea la Licencia Pública General de GNU para más "
+"detalles.\n"
 "# \n"
-"# You should have received a copy of the GNU General Public License along \n"
-"# with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+"# Debería haber recibido una copia de la Licencia Pública General de GNU "
+"con\n"
+"# este programa. Si no, consulte <http://www.gnu.org/licenses/>.\n"
 
 #. New application
 #: ../winconn/indicator.py:40
 msgid "Show WinConn"
-msgstr "Покажи WinConn"
+msgstr "Mostrar WinConn"
 
 #: ../winconn.desktop.in.h:2
 msgid "WinConn RemoteApp manager"
-msgstr "WinConn RemoteApp мениджър"
+msgstr "Administrador de WinConn RemoteApp"
 
 #: ../winconn.desktop.in.h:3
 msgid "Add new remote app"
-msgstr "Добавяне на ново отдалечено приложение"
+msgstr "Añadir una aplicación remota nueva"
