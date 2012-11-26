@@ -88,7 +88,7 @@ def update_desktop_file(filename, target_pkgdata, target_scripts):
 
         for line in fin:
             if 'Icon=' in line:
-                line = "Icon=%s\n" % (target_pkgdata + 'media/winconn.svg')
+                line = "Icon=%s\n" % (target_pkgdata + 'media/winconn.png')
             elif 'Exec=' in line:
                 cmd = line.split("=")[1].split(None, 1)
                 line = "Exec=%s" % (target_scripts + 'winconn')

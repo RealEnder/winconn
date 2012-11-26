@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: winconn
 Upstream-Contact: Alex Stanev <alex@stanev.org>
-Source: http://stanev.org/winconn
+Source: https://launchpad.net/winconn
 
 Files: *
 Copyright: (C) 2012 Alex Stanev <alex@stanev.org>
