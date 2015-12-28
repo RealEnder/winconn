@@ -19,8 +19,6 @@ Depends: ${misc:Depends},
  python-gobject-2,
  gir1.2-appindicator3-0.1,
  yelp,
- libfreerdp1,
- libfreerdp-plugins-standard,
  freerdp-x11,
  xdg-utils
 Description: RemoteApp connection manager
