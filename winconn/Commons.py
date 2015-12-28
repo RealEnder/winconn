@@ -232,19 +232,19 @@ class Commons:
         return True
     
     def buildCmd(self):
-        cmd = ['xfreerdp', '--ignore-certificate']
+        cmd = ['xfreerdp', '/cert-ignore']
         # compress
         if not self.__odApp__['compress']:
-            cmd.append('-z')
+            cmd.append('/compression')
         # RemoteFX
         if not self.__odApp__['remotefx']:
-            cmd.append('--rfx')
+            cmd.append('/rfx')
 
         # port
         if self.__odApp__['port'] != '3389':
-            cmd.extend(['-t', self.__odApp__['port']])
+            cmd.extend('/port:{0}'.format(self.__odApp__['port']))
         # user
-        cmd.extend(['-u', self.__odApp__['user']])
+        cmd.extend(['/u:{0}'.format(self.__odApp__['user'])])
         # pass
         if self.__odApp__['pass'] == '':
             p = prompts.Prompt('WinConn',_('Enter password for application: ')+self.__odApp__['name'])
@@ -261,30 +261,28 @@ class Commons:
             else:
                 return None
 
-        cmd.extend(['-p', self.__odApp__['pass']])
+        cmd.extend(['/p:{0}'.format(self.__odApp__['pass'])])
         # domain
         if self.__odApp__['domain'] != '':
-            cmd.extend(['-d', self.__odApp__['domain']])
+            cmd.extend(['/d:{0}'.format(self.__odApp__['domain'])])
         # clipboard
         # does not work with freerdp 1.0.1
         if not self.__odApp__['clipboard']:
-            cmd.extend(['--plugin', 'cliprdr'])
+            cmd.extend(['+clipboard'])
         # sound
         if not self.__odApp__['sound']:
-            cmd.extend(['--plugin', 'rdpsnd'])
+            cmd.extend(['/sound'])
         # printer
         if not self.__odApp__['printer']:
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'printer'])
+            cmd.extend(['/printer'])
         # folder
         if self.__odApp__['folder'] != '':
-            cmd.extend(['--plugin', 'rdpdr', '--data', 'disk:winconn:{0}'.format(self.__odApp__['folder'])])
-        # --
-        if not self.__odApp__['printer'] or self.__odApp__['folder'] != '':
-            cmd.append('--')
+            cmd.extend(['/drive:winconn:{0}'.format(self.__odApp__['folder'])])
         # app
-        cmd.extend(['--app', '--plugin', 'rail.so', '--data', self.__odApp__['app'], '--'])
+        cmd.extend(['/app:||{0}'.format(self.__odApp__['app'])])
+        # last part without [], you see
         # server
-        cmd.append(self.__odApp__['server'])
+        cmd.append('/v:{0}'.format(self.__odApp__['server']))
         
         logger.debug(cmd)
 
